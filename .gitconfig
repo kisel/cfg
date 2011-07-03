@@ -1,0 +1,21 @@
+[core]
+	editor = 'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin
+#	autocrlf = true
+#	safecrlf = true
+#	autocrlf = false
+#	safecrlf = false
+
+[alias]
+        ci = commit
+	co = checkout
+	dcommit = svn dcommit
+	st = status
+	st = status
+	br = branch
+	ci = commit -a
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	svnhelp = !"git svn help 2>&1|less"
+
+[user]
+	email = kiton@ledas.com
+	name = Anton
