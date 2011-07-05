@@ -1,5 +1,7 @@
 [core]
-	editor = 'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin
+#	editor = 'notepad++.exe' -multiInst -notabbar -nosession -noPlugin
+	editor = 'vim'
+	excludesfile = ~/.gitignore_global
 #	autocrlf = true
 #	safecrlf = true
 #	autocrlf = false
@@ -10,6 +12,7 @@
 	co = checkout
 	dcommit = svn dcommit
 	st = status
+	sta = stash
 	st = status
 	br = branch
 	ci = commit -a
