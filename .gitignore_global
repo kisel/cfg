@@ -28,4 +28,6 @@ obj-full
 obj-work
 obj-work-fulldebug
 old
+*.stackdump
+
 
