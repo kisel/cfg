@@ -14,8 +14,9 @@
   sta = stash
   st = status
   br = branch
-  ci = commit -a
-  cia = commit --amend -a
+  ci = commit 
+  cia = commit -a
+  fix = commit --amend
   cp = cherry-pick
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   svnhelp = !"git svn help 2>&1|less"
@@ -28,7 +29,9 @@
   rba = rebase --abort
   lost = !"git fsck | awk '/dangling commit/ {print $3}' | git show --format='SHA1: %C(yellow)%h%Creset %f' --stdin | awk '/SHA1/ {sub(\"SHA1: \", \"\"); print}'"
   check = !"git grep '.include .\\\\.\\\\.\\\\\\\\'"
-
+  dica = diff --cached
+  gcfg = config --global 
+  
 [user]
   email = kiton@ledas.com
   name = Anton
