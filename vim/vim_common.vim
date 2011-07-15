@@ -1,7 +1,7 @@
 set nocompatible
 
-let $SC='$HOME/CONFIG/vim'
-let $CFG='$HOME/CONFIG/gvim.vim'
+let $SC='$HOME/.cfg/vim'
+let $CFG='$HOME/.cfg/gvim.vim'
 
 
 map <S-F1> :help quickref <CR>
@@ -57,26 +57,23 @@ menu Encoding.Read.koi8-r<Tab><F7> :e ++enc=koi8-r<CR>
 menu Encoding.Read.cp866<Tab><F7> :e ++enc=cp866<CR>
 map <F7> :emenu Encoding.Read.<TAB>
 
-" Настраиваем переключение раскладок клавиатуры по <C-^>
-"set keymap=russian-jcukenwin
-" Раскладка по умолчанию - английская
+
 "set iminsert=0
 
 set tabstop=2
 set shiftwidth=2
 set smarttab
-set et "— включим автозамену по умолчанию
+set et "enable auto-replace
 
-set ai " — включим автоотступы для новых строк
-set cin " — включим отступы в стиле Си
+set autoindent 
+set cindent " C indent
 
 set showmatch
 set nohlsearch
 set incsearch
-set smartcase "ignorecase smartcase 
+set smartcase "ignorecase or smartcase 
 
 set lz
-
 
 set guioptions-=T "Toolbar
 "set guioptions-=m "menu

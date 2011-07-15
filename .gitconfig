@@ -1,37 +1,34 @@
 [core]
-#	editor = 'notepad++.exe' -multiInst -notabbar -nosession -noPlugin
-  editor = 'vim'
-  excludesfile = ~/.gitignore_global
-#	autocrlf = true
-#	safecrlf = true
-#	autocrlf = false
-#	safecrlf = false
-
+	editor = 'vim'
+	excludesfile = ~/.cfg/gitignore_global
+	autocrlf = true
 [alias]
-  co = checkout
-  dcommit = svn dcommit
-  st = status
-  sta = stash
-  st = status
-  br = branch
-  ci = commit 
-  cia = commit -a
-  fix = commit --amend
-  cp = cherry-pick
-  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  svnhelp = !"git svn help 2>&1|less"
-  di = diff
-  mt = mergetool
-  me = merge
-  rb = rebase
-  rbc = rebase --continue
-  rbs = rebase --skip
-  rba = rebase --abort
-  lost = !"git fsck | awk '/dangling commit/ {print $3}' | git show --format='SHA1: %C(yellow)%h%Creset %f' --stdin | awk '/SHA1/ {sub(\"SHA1: \", \"\"); print}'"
-  check = !"git grep '.include .\\\\.\\\\.\\\\\\\\'"
-  dica = diff --cached
-  gcfg = config --global 
-  
+	co = checkout
+	dcommit = svn dcommit
+	st = status
+	st = status
+	sta = stash
+	br = branch
+	ci = commit
+	cia = commit -a
+	fix = commit --amend
+	cp = cherry-pick
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	svnhelp = !\"git svn help 2>&1|less\"
+	di = diff
+	mt = mergetool
+	me = merge
+	rb = rebase
+	rbc = rebase --continue
+	rbs = rebase --skip
+	rba = rebase --abort
+	lost = !\"git fsck | awk '/dangling commit/ {print $3}' | git show --format='SHA1: %C(yellow)%h%Creset %f' --stdin | awk '/SHA1/ {sub(\"SHA1: \", \"\"); print}'\"
+	check = !\"git grep '.include .//.//.////'\"
+	dica = diff --cached
+	gcfg = config --global
 [user]
-  email = kiton@ledas.com
-  name = Anton
+	email = kiton@ledas.com
+	name = Anton
+
+[merge]
+	tool = p4merge

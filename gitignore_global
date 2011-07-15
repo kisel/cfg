@@ -29,5 +29,7 @@ obj-work
 obj-work-fulldebug
 old
 *.stackdump
+.svn
+.hg
 
 

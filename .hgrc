@@ -1,0 +1,35 @@
+[ui]
+username = Anton Kiselev <halgrep@gmail.com>
+ignore.user = ~/.cfg/hgignore_global
+ssh=ssh 
+
+[extensions]
+hgsubversion=$OPT/hg/hgsubversion/hgsubversion
+#collapse=$OPT/hg/hgcollapse/hgext/collapse.py
+#histedit=$OPT/hg/histedit
+rebase=
+fetch = 
+bookmarks = 
+#color = 
+share = 
+mq = 
+eol = 
+#progress = 
+purge = 
+
+
+[repository]
+native = CRLF
+
+[alias]
+#slog = log --template '{date|shortdate} [{rev}:{node|short}] {author|person}: {desc|firstline}\n' -l 10
+#sin = incoming --template '{date|shortdate} [{rev}:{node|short}] {author|person}: {desc|firstline}\n'
+#sout = outgoing --template '{date|shortdate} [{rev}:{node|short}] {author|person}: {desc|firstline}\n'
+#sheads = heads --template '{date|shortdate} [{rev}:{node|short}] {author|person}: {desc|firstline}\n'
+#sglog = glog --template '[{rev}:{node|short}] by {author|person} \n{desc|fill68}\n\n'
+
+[tortoisehg]
+ui.language = en
+
+[eol]
+only-consistent = False

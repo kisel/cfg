@@ -1,0 +1,4 @@
+set guifont=Consolas:h12:cDEFAULT
+map <A-h> :nohls<enter>
+set nohls
+
