@@ -1,4 +1,4 @@
-source $HOME/.cfg/vimrc.vim
+source $HOME/.cfg/vim/vim_common.vim 
 
 if has("unix")
   set nobackup
