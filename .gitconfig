@@ -26,6 +26,9 @@
 	check = !\"git grep '.include .//.//.////'\"
 	dica = diff --cached
 	gcfg = config --global
+	rehard = reset --hard
+	tip = log -1
+	aa = add **.h **.vcproj **.cpp
 [user]
 	email = kiton@ledas.com
 	name = Anton
