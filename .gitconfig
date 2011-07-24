@@ -22,8 +22,8 @@
 	rbc = rebase --continue
 	rbs = rebase --skip
 	rba = rebase --abort
-	lost = !\"git fsck | awk '/dangling commit/ {print $3}' | git show --format='SHA1: %C(yellow)%h%Creset %f' --stdin | awk '/SHA1/ {sub(\"SHA1: \", \"\"); print}'\"
-	check = !\"git grep '.include .//.//.////'\"
+	lost = !"git fsck | awk '/dangling commit/ {print $3}' | git show --format='SHA1: %C(yellow)%h%Creset %f' --stdin | awk '/SHA1/ {sub(\"SHA1: \", \"\"); print}'"
+	check = !"sh ~/.cfg/scripts/git-check.sh"
 	dica = diff --cached
 	gcfg = config --global
 	rehard = reset --hard
