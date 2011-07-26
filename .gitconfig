@@ -1,7 +1,8 @@
 [core]
 	editor = 'vim'
 	excludesfile = ~/.cfg/gitignore_global
-	autocrlf = true
+  #autocrlf = true
+
 [alias]
 	co = checkout
 	dcommit = svn dcommit
@@ -37,3 +38,6 @@
 
 [merge]
 	tool = p4merge
+
+[color]
+  ui=auto
