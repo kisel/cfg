@@ -4,7 +4,7 @@
 
 cd ~/.cfg
   
-for i in `find . -type f -level 0 -name ".*"|cut -c 3-`; do
+for i in `find . -type f -maxdepth 1 -name ".*"|cut -c 3-`; do
   echo diff $i ~/$i
   diff $i ~/$i
   rc=$?
