@@ -27,8 +27,10 @@
 	dica = diff --cached
 	gcfg = config --global
 	rehard = reset --hard
-	tip = log -1
+	tip = log -1 --decorate
 	aa = add **.h **.vcproj **.cpp
+        meff = merge --ff-only
+        me =   merge
 [user]
 	email = kiton@ledas.com
 	name = Anton
