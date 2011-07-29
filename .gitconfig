@@ -34,7 +34,7 @@
         me =   merge
 [user]
 	email = kiton@ledas.com
-	name = Anton
+	name = Anton Kiselev
 
 [merge]
 	tool = p4merge

@@ -1,9 +1,10 @@
 #!/bin/sh
 
-has_win_includes=$(git grep '#include \"\.\.\\\\' 2>/dev/null)
+has_win_includes=$(git grep '#include .*\\.*' 2>/dev/null)
+
 if [ "" != "$has_win_includes" ]; then
   echo "Incorrect includes founded:"
-  git grep '#include \"\.\.\\\\'
+  git grep '#include .*\\.*'
   exit 1
 fi
 
