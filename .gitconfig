@@ -33,6 +33,9 @@
         meff = merge --ff-only
         me =   merge
         mesq = merge --squash
+        sfe = svn fetch
+        sre = svn rebase
+
 [user]
 	email = kiton@ledas.com
 	name = Anton Kiselev
