@@ -35,6 +35,7 @@
         mesq = merge --squash
         sfe = svn fetch
         sre = svn rebase
+	dci = svn dcommit
 
 [user]
 	email = kiton@ledas.com
