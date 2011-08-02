@@ -32,6 +32,7 @@
 	aa = add **.h **.vcproj **.cpp
         meff = merge --ff-only
         me =   merge
+        mesq = merge --squash
 [user]
 	email = kiton@ledas.com
 	name = Anton Kiselev
