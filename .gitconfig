@@ -36,6 +36,7 @@
         sfe = svn fetch
         sre = svn rebase
 	dci = svn dcommit
+   	puo = push origin
 
 [user]
 	email = kiton@ledas.com
