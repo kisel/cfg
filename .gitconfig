@@ -32,6 +32,13 @@
 	aa = add **.h **.vcproj **.cpp
         meff = merge --ff-only
         me =   merge
+        mesq = merge --squash
+        sfe = svn fetch
+        svf = svn fetch
+        sre = svn rebase
+	dci = svn dcommit --quiet
+   	puo = push origin
+
 [user]
 	email = kiton@ledas.com
 	name = Anton Kiselev
