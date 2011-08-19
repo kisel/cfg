@@ -34,8 +34,9 @@
         me =   merge
         mesq = merge --squash
         sfe = svn fetch
+        svf = svn fetch
         sre = svn rebase
-	dci = svn dcommit
+	dci = svn dcommit --quiet
    	puo = push origin
 
 [user]
