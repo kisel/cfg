@@ -23,6 +23,9 @@ if has("gui_running")
   se nu
 endif
 
+if exists('g:loaded_plug')
+" assuming it is auto-loaded
+" https://github.com/junegunn/vim-plug/
 " https://github.com/junegunn/vim-plug?tab=readme-ov-file#installation
 " curl https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
 "   windown location : ~\vimfiles\autoload\plug.vim
@@ -41,6 +44,7 @@ nmap <C-P> :FZF<CR>
 Plug 'tpope/vim-fugitive'
 
 call plug#end()
+endif
 
 
 
