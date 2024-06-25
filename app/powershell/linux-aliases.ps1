@@ -1,7 +1,7 @@
+# pretend it's a bash shell
 
 Set-Alias grep Select-String
 Set-Alias open Invoke-Item
-Set-Alias g git
 Set-Alias less more
 Set-Alias time Measure-Command
 function .. { cd .. }
@@ -19,17 +19,14 @@ Function defender-enable {
         Set-MpPreference -DisableRealtimeMonitoring $false
 }
 
-Function mcmd {
-    # executes a single command withing msys
-    & "C:\msys64\msys2_shell.cmd" -here -defterm -mingw64 -no-start -c "$args"
-}
-Function msys {
-    # starts msys bash without windows $PATH
-    & "C:\msys64\msys2_shell.cmd" -here -defterm -mingw64 -no-start $args
-}
+# common powershell scripts
 
-Function msysfp {
-    # starts msys bash WITH windows $PATH. may cause conflicts
-    & "C:\msys64\msys2_shell.cmd" -here -defterm -mingw64 -no-start -use-full-path $args
+# Prints time took to run last command
+function time-last {
+    $cmd = (Get-History -Count 1)
+    $dur = $cmd.Duration
+    $totalSec = [math]::floor($dur.TotalSeconds)
+    $ms = [math]::floor($dur.Milliseconds)
+    Write-Output "rc=$LastExitCode | took $totalSec seconds $ms ms"
 }
 
