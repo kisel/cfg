@@ -36,6 +36,7 @@
     # longpaths = true
     # sshCommand = 
     # excludesfile = ~/.gitignore
+    # excludesfile = ~/.cfg/app/git/gitignore_common
 
 #[filter "lfs"]
 #    clean = git-lfs clean -- %f

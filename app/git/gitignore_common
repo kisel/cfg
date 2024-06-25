@@ -1,0 +1,17 @@
+*.sw?
+*.tmp
+*.log
+*.exe
+*.class
+*.jar
+*.bak
+*.local
+*.pyc
+*.orig
+*.user
+*.db
+bak
+old
+tags
+.DS_Store
+
