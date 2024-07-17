@@ -1,10 +1,16 @@
 set nocompatible
 set background=dark
 
+" allow switching buffers on modified files
+set hidden
+
 syntax on
 filetype on
 filetype indent on
 filetype plugin on
+
+" fix broken indent when commenting-out lines with #
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0#
 
 if has("gui_running")
   " Maximize gvim window
