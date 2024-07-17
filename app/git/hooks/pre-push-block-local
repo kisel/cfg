@@ -1,0 +1,16 @@
+#!/bin/sh
+# git pre-push hook
+# blocks commits containing "LOCAL:" from git push
+# to avoid local patches being pushed
+
+echo "pre-push hook: $@"
+
+# loop over lines from stdin
+while IFS= read -r line; do
+    ref=`echo $line | awk '{print $2}' `
+    if git log --oneline --grep="^LOCAL:" $ref | grep -E ".*LOCAL:.*" ; then
+        echo "Refusing to push with LOCAL: commits!"
+        exit 1
+    fi
+done
+
