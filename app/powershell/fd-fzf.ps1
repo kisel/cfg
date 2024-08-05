@@ -6,7 +6,6 @@
 # https://github.com/kelleyma49/PSFzf/tree/master?tab=readme-ov-file#psreadline-integration
 
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
-Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 
 #Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 #$script:AltCCommand = [ScriptBlock]{
@@ -15,4 +14,16 @@ Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 #}
 #Set-PsFzfOption -AltCCommand $script:AltCCommand 
 
+# modified https://github.com/kelleyma49/PSFzf/blob/master/PSFzf.TabExpansion.ps1
+# to replace \ with / after completion is done
+function Invoke-FzfTabCompletionCustom() {
+    Invoke-FzfTabCompletion
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadline]::GetBufferState([ref]$line, [ref]$cursor)
+    $line = $line.Replace("\", "/")
+    [Microsoft.PowerShell.PSConsoleReadline]::Replace(0, $line.Length, $line)
+}
+
+Set-PSReadLineKeyHandler -Key Shift-Tab -ScriptBlock { Invoke-FzfTabCompletionCustom }
 
