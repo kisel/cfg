@@ -1,16 +1,30 @@
 set nocompatible
 set background=dark
 
+" default sw is 8 - use 4 instead
+set shiftwidth=4
+" default indent adds tab. use space instead
+set expandtab
+" Number of spaces that a <Tab> in the file counts for
+"set tabstop=4
+"
 " allow switching buffers on modified files
 set hidden
+
+" disable bell
+set belloff=all
 
 syntax on
 filetype on
 filetype indent on
 filetype plugin on
 
+
 " fix broken indent when commenting-out lines with #
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0#
+" yaml indent (still not great)
+autocmd FileType yaml setlocal foldmethod=indent foldlevel=9
+autocmd FileType go setlocal noexpandtab
 
 if has("gui_running")
   " Maximize gvim window
@@ -21,7 +35,12 @@ if has("gui_running")
 endif
 
 set incsearch
-"set hlsearch
+set hlsearch
+" :noh on ESC
+nnoremap <ESC> :nohlsearch<CR>
+
+" Minimal number of screen lines to keep above and below the cursor.
+set scrolloff=3
 
 "set shiftwidth=4
 "set smarttab
@@ -34,6 +53,21 @@ set incsearch
 " set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 
 "always hide swap files
-"let g:netrw_list_hide= '^\..*\.sw[op]$'
+let g:netrw_list_hide= '^\..*\.sw[op]$'
 
-" autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" paste over something keeping the register. "_P
+xmap <leader>p "_dP
+
+" have x (removes single character) not go into the default registry
+nnoremap x "_x
+
+" Easy movements without Ctrl-W
+noremap <C-j> <C-W>j
+noremap <C-k> <C-W>k
+noremap <C-h> <C-W>h
+noremap <C-l> <C-W>l
+" Some terminals with recognize Ctrl-h as Backspace
+noremap <C-BS> <C-W>h
+
+
