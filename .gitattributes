@@ -1,2 +1,4 @@
 *	text=auto
+*.bat	text=crlf
+*.cmd	text=crlf
 
