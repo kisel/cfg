@@ -5,20 +5,15 @@ Set-Alias open Invoke-Item
 Set-Alias less more
 Set-Alias time Measure-Command
 Set-Alias which Get-Command
+
+# zsh-style cd
 function .. { cd .. }
 function ... { cd ../.. }
+function .... { cd ../../.. }
 
-Function head($fn) {
-        Get-Content -Path $fn -ReadCount 32 | Format-List | more
-}
-
-Function defender-disable {
-        Set-MpPreference -DisableRealtimeMonitoring $true
-}
-
-Function defender-enable {
-        Set-MpPreference -DisableRealtimeMonitoring $false
-}
+#Function head($fn) {
+#        Get-Content -Path $fn -ReadCount 32 | Format-List | more
+#}
 
 # common powershell scripts
 
