@@ -1,40 +1,12 @@
-set nocompatible
-set background=dark
+source $HOME/.cfg/app/vim/common.vim
 
-" default sw is 8 - use 4 instead
-set shiftwidth=4
-" default indent adds tab. use space instead
-set expandtab
-" Number of spaces that a <Tab> in the file counts for
-"set tabstop=4
-"
-" allow switching buffers on modified files
-set hidden
-
-syntax on
-filetype on
-filetype indent on
-filetype plugin on
-
-
-" fix broken indent when commenting-out lines with #
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0#
-" yaml indent (still not great)
-autocmd FileType yaml setlocal foldmethod=indent foldlevel=9
-
-" available by default
-"colo slate
-"colo koehler
-"colo industry
-"colo ron
-colo torte
-"colo wildcharm " don't see a selection
-"hi Visual ctermfg=NONE ctermbg=59 cterm=reverse
+" use OS clipboard by default for easy copy-paste without "* "+
+set clipboard^=unnamed
 
 " Clipboard with Ctrl-Shift-C/V
 if has("gui_running") 
-    nnoremap <C-S-c> "+y
-    nnoremap <C-S-v> "+P
+    "nnoremap <C-S-c> "+y
+    "nnoremap <C-S-v> "+P
     vnoremap <C-S-c> "+y
     vnoremap <C-S-v> "+P
 endif
@@ -82,6 +54,7 @@ try
 
 
     Plug 'tpope/vim-fugitive'
+    Plug 'ghifarit53/tokyonight-vim'
 
     call plug#end()
 catch /Unknown function/
@@ -89,4 +62,17 @@ catch /Unknown function/
     " for example on git commit with EDITOR=vim
 endtry
 
+" --- Color themes
+" 24bit colors support
+set termguicolors
 
+" available by default
+"colo slate
+"colo koehler
+"colo industry
+"colo ron
+"colo torte
+"colo zaibatsu
+colo tokyonight
+"colo wildcharm " don't see a selection on wildcharm. the following line is a fixup
+"hi Visual ctermfg=NONE ctermbg=59 cterm=reverse
