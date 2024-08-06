@@ -1,157 +1,229 @@
+-- https://wezfurlong.org/wezterm/config/lua/config/index.html
 -- Pull in the wezterm API
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
 local act = wezterm.action
+local mux = wezterm.mux
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
+local c = config
 
-config.font = wezterm.font 'Consolas'
+-- config.font = wezterm.font("JetBrains Mono")
+-- config.font = wezterm.font("Consolas")
+-- config.font = wezterm.font("0xProto Nerd Font Mono")
+--
+config.font = wezterm.font_with_fallback({
+	"Consolas",
+	"0xProto Nerd Font Mono",
+})
 
 --config.color_scheme = 'AdventureTime'
 --config.color_scheme = 'Batman'
 --config.color_scheme = 'Red Scheme'
 --config.window_decorations = "NONE"
-config.window_decorations = "TITLE | RESIZE" 
-
+-- config.window_decorations = "TITLE | RESIZE"
+config.window_decorations = "RESIZE"
 
 --config.color_scheme = 'Batman'
 --config.color_scheme = 'Builtin Solarized Dark'
 
+config.unix_domains = {
+	{
+		name = "unix",
+	},
+	{
+		name = "dropdown",
+	},
+}
 
-config.default_prog = { 'pwsh', '-nologo' }
+config.audible_bell = "Disabled"
 
+-- This causes `wezterm` to act as though it was started as
+-- `wezterm connect unix` by default, connecting to the unix
+-- domain on startup.
+-- If you prefer to connect manually, leave out this line.
+-- config.default_gui_startup_args = { 'connect', 'unix' }
 
--- timeout_milliseconds defaults to 1000 and can be omitted
+config.default_domain = "unix"
+config.default_prog = { "pwsh", "-nologo" }
+
+-- maximized window on 0,0 instead of somewhere centered
+wezterm.on("gui-startup", function(cmd)
+	local tab, pane, window = mux.spawn_window(cmd or {})
+	window:gui_window():set_position(0, 0)
+	window:gui_window():maximize()
+end)
+
+-- timeout_millisecondm defaults to 1000 and can be omitted
 -- tmux leader
 -- config.leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 }
 -- alternative leader key to make life easier with tmux
-config.leader = { key = 'g', mods = 'CTRL', timeout_milliseconds = 1000 }
+config.leader = { key = "g", mods = "CTRL", timeout_milliseconds = 1000 }
 
 -- extra actions
 local ext = {}
-ext.RenameTab = act.PromptInputLine {
-        description = 'Enter new name for tab',
-        action = wezterm.action_callback(function(window, pane, line)
-          if line then
-            window:active_tab():set_title(line)
-          end
-        end)
-}
-ext.RenameWindow = act.PromptInputLine {
-        description = 'Enter new name for window',
-        action = wezterm.action_callback(function(window, pane, line)
-          if line then
-            wezterm.GLOBAL.title = line .. ' '
-          end
-        end)
-}
+ext.RenameTab = act.PromptInputLine({
+	description = "Enter new name for tab",
+	action = wezterm.action_callback(function(window, pane, line)
+		if line then
+			window:active_tab():set_title(line)
+		end
+	end),
+})
+ext.RenameWindow = act.PromptInputLine({
+	description = "Enter new name for window",
+	action = wezterm.action_callback(function(window, pane, line)
+		if line then
+			wezterm.GLOBAL.title = line .. " "
+		end
+	end),
+})
 
-wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
-  local zoomed = ''
-  if tab.active_pane.is_zoomed then
-    zoomed = '[Z] '
-  end
+wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
+	local zoomed = ""
+	if tab.active_pane.is_zoomed then
+		zoomed = "[Z] "
+	end
 
-  local index = ''
-  if #tabs > 1 then
-    index = string.format('[%d/%d] ', tab.tab_index + 1, #tabs)
-  end
+	local index = ""
+	if #tabs > 1 then
+		index = string.format("[%d/%d] ", tab.tab_index + 1, #tabs)
+	end
 
-  return (wezterm.GLOBAL.title or '')  .. zoomed .. index .. tab.active_pane.title
+	return (wezterm.GLOBAL.title or "") .. zoomed .. index .. tab.active_pane.title
 end)
 
-wezterm.on('augment-command-palette', function(window, pane)
-  return {
-    {
-      brief = 'Rename window',
-      icon = 'md_rename_box',
-      action = ext.RenameWindow
-      },
-    }
-end)
-wezterm.on('augment-command-palette', function(window, pane)
-  return {
-    {
-      brief = 'Rename tab',
-      icon = 'md_rename_box',
-      action = ext.RenameTab
-      },
-    }
-end)
+-- true - graphical tabs. false - text tabs
+c.use_fancy_tab_bar = false
+c.show_new_tab_button_in_tab_bar = true
 
+--c.color_scheme = "carbonfox"
+--c.color_scheme = 'Batman'
 
+-- wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+--   -- local palette = config.resolved_palette.tab_bar
+--   -- local colors = {
+--   --   bg = palette.background,
+--   --   tab = tab.is_active and palette.active_tab.bg_color or palette.inactive_tab.bg_color,
+--   --   fg = tab.is_active and palette.active_tab.fg_color or palette.inactive_tab.fg_color,
+--   -- }
+--
+--   return {
+--   --  { Background = { Color = colors.bg } },
+--   --  { Foreground = { Color = colors.tab } },
+--   --  { Text = wezterm.nerdfonts.ple_lower_right_triangle },
+--   --  --{ Background = { Color = colors.tab } },
+--   --  { Background = { Color = '#00ff00' } },
+--   --  { Foreground = { Color = colors.fg } },
+--   --  { Text = '!!!' },
+--     { Text = ' [' },
+--     { Text = tab.active_pane.title:sub(-max_width) },
+--     { Text = '] ' },
+--   --  { Text = tab.active_pane.title },
+--   --  { Background = { Color = colors.tab } },
+--   --  { Foreground = { Color = colors.bg } },
+--   --  { Text = wezterm.nerdfonts.ple_upper_right_triangle },
+--   }
+-- end)
+
+wezterm.on("augment-command-palette", function(window, pane)
+	return {
+		{
+			brief = "Rename window",
+			icon = "md_rename_box",
+			action = ext.RenameWindow,
+		},
+	}
+end)
+wezterm.on("augment-command-palette", function(window, pane)
+	return {
+		{
+			brief = "Rename tab",
+			icon = "md_rename_box",
+			action = ext.RenameTab,
+		},
+	}
+end)
 
 -- https://wezfurlong.org/wezterm/config/lua/keyassignment/ActivateTabRelative.html
 
 local clk = config.leader.key
 config.keys = {
-    -- escape for leader on double-press
-    { key = clk, mods = "LEADER|CTRL",  action=act.SendKey { key = clk, mods = 'CTRL' }, },
+	-- escape for leader on double-press
+	{ key = clk, mods = "LEADER|CTRL", action = act.SendKey({ key = clk, mods = "CTRL" }) },
 
-    --- tmux splits " and %
-    { key = "\"",mods = "LEADER|SHIFT",action=act{SplitVertical={domain="CurrentPaneDomain"}}},
-    { key = "%", mods = "LEADER|SHIFT", action=act{SplitHorizontal={domain="CurrentPaneDomain"}}},
-    
-    -- tmux new tab ctrl-b c
-    { key = 'c', mods = 'LEADER', action = act.SpawnTab 'CurrentPaneDomain' },
+	--- tmux splits " and %
+	{ key = '"', mods = "LEADER|SHIFT", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
+	{ key = "%", mods = "LEADER|SHIFT", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
 
-    -- vim ctrl-w splits
-    { key = "s", mods = "LEADER",       action=act{SplitVertical={domain="CurrentPaneDomain"}}},
-    { key = "v", mods = "LEADER",       action=act{SplitHorizontal={domain="CurrentPaneDomain"}}},
+	-- tmux new tab ctrl-b c
+	{ key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+	{ key = "y", mods = "LEADER", action = wezterm.action.SpawnCommandInNewTab({
+		args = { "cmd.exe" },
+	}) },
 
-    { key = "z", mods = "LEADER",       action="TogglePaneZoomState" },
+	-- vim ctrl-w splits
+	{ key = "s", mods = "LEADER", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
+	{ key = "v", mods = "LEADER", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
 
-    -- pane movement vim
-    { key = "h", mods = "LEADER",       action=act{ActivatePaneDirection="Left"}},
-    { key = "j", mods = "LEADER",       action=act{ActivatePaneDirection="Down"}},
-    { key = "k", mods = "LEADER",       action=act{ActivatePaneDirection="Up"}},
-    { key = "l", mods = "LEADER",       action=act{ActivatePaneDirection="Right"}},
+	{ key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
 
-    -- pane movement tmux arrows
-    { key = "LeftArrow",  mods = "LEADER",       action=act{ActivatePaneDirection="Left"}},
-    { key = "DownArrow",  mods = "LEADER",       action=act{ActivatePaneDirection="Down"}},
-    { key = "UpArrow",    mods = "LEADER",       action=act{ActivatePaneDirection="Up"}},
-    { key = "RightArrow", mods = "LEADER",       action=act{ActivatePaneDirection="Right"}},
+	-- pane movement vim
+	{ key = "h", mods = "LEADER", action = act({ ActivatePaneDirection = "Left" }) },
+	{ key = "j", mods = "LEADER", action = act({ ActivatePaneDirection = "Down" }) },
+	{ key = "k", mods = "LEADER", action = act({ ActivatePaneDirection = "Up" }) },
+	{ key = "l", mods = "LEADER", action = act({ ActivatePaneDirection = "Right" }) },
 
-    -- pane size
-    { key = "H", mods = "LEADER|SHIFT", action=act{AdjustPaneSize={"Left", 5}}},
-    { key = "J", mods = "LEADER|SHIFT", action=act{AdjustPaneSize={"Down", 5}}},
-    { key = "K", mods = "LEADER|SHIFT", action=act{AdjustPaneSize={"Up", 5}}},
-    { key = "L", mods = "LEADER|SHIFT", action=act{AdjustPaneSize={"Right", 5}}},
+	-- pane movement tmux arrows
+	{ key = "LeftArrow", mods = "LEADER", action = act({ ActivatePaneDirection = "Left" }) },
+	{ key = "DownArrow", mods = "LEADER", action = act({ ActivatePaneDirection = "Down" }) },
+	{ key = "UpArrow", mods = "LEADER", action = act({ ActivatePaneDirection = "Up" }) },
+	{ key = "RightArrow", mods = "LEADER", action = act({ ActivatePaneDirection = "Right" }) },
 
-    -- tmux tab movement ctrl-b [n|p]
-    { key = "n", mods = "LEADER",       action=act.ActivateTabRelative(1)},
-    { key = "p", mods = "LEADER",       action=act.ActivateTabRelative(-1)},
+	-- tab fast arrows
+	{ key = "LeftArrow", mods = "CTRL|SHIFT", action = act.ActivateTabRelative(-1) },
+	{ key = "RightArrow", mods = "CTRL|SHIFT", action = act.ActivateTabRelative(1) },
+	{ key = "UpArrow", mods = "CTRL|SHIFT", action = act({ ActivatePaneDirection = "Up" }) },
+	{ key = "DownArrow", mods = "CTRL|SHIFT", action = act({ ActivatePaneDirection = "Down" }) },
 
-    -- tmux switch to last tab. ctrl-b l
-    { key = "l", mods = "LEADER",       action=act.ActivateLastTab},
+	-- pane size
+	{ key = "H", mods = "LEADER|SHIFT", action = act({ AdjustPaneSize = { "Left", 5 } }) },
+	{ key = "J", mods = "LEADER|SHIFT", action = act({ AdjustPaneSize = { "Down", 5 } }) },
+	{ key = "K", mods = "LEADER|SHIFT", action = act({ AdjustPaneSize = { "Up", 5 } }) },
+	{ key = "L", mods = "LEADER|SHIFT", action = act({ AdjustPaneSize = { "Right", 5 } }) },
 
+	-- tmux tab movement ctrl-b [n|p]
+	{ key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
+	{ key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
 
-    -- tmux rename tab
-    { key = ",", mods = "LEADER",       action=ext.RenameTab},
-    --{ key = ",", mods = "LEADER",       action=act.ShowTabNavigator},
+	-- tmux switch to last tab. ctrl-b l
+	{ key = "l", mods = "LEADER", action = act.ActivateLastTab },
 
-    -- wezterm tab navigator with search
-    { key = "/", mods = "LEADER",       action=act.ShowTabNavigator},
+	-- tmux rename tab
+	{ key = ",", mods = "LEADER", action = ext.RenameTab },
+	--{ key = ",", mods = "LEADER",       action=act.ShowTabNavigator},
 
+	-- wezterm tab navigator with search by ctrl-g / or ctrl-shift-/
+	{ key = "/", mods = "LEADER", action = act.ShowTabNavigator },
+	{ key = "?", mods = "CTRL|SHIFT", action = act.ShowTabNavigator },
 
-    -- tmux close tab
-    { key = "K", mods = "LEADER|SHIFT", action=act{CloseCurrentTab={confirm=true}}},
-    -- { key = "d", mods = "LEADER",       action=act{CloseCurrentPane={confirm=true}}},
-    -- { key = "x", mods = "LEADER",       action=act{CloseCurrentPane={confirm=true}}}
+	-- tmux close tab
+	{ key = "K", mods = "LEADER|SHIFT", action = act({ CloseCurrentTab = { confirm = true } }) },
+	-- { key = "d", mods = "LEADER",       action=act{CloseCurrentPane={confirm=true}}},
+	-- { key = "x", mods = "LEADER",       action=act{CloseCurrentPane={confirm=true}}}
 
-    -- tmux tab index activation. ctrl-b #
-    { key = "1", mods = "LEADER",       action=act{ActivateTab=0}},
-    { key = "2", mods = "LEADER",       action=act{ActivateTab=1}},
-    { key = "3", mods = "LEADER",       action=act{ActivateTab=2}},
-    { key = "4", mods = "LEADER",       action=act{ActivateTab=3}},
-    { key = "5", mods = "LEADER",       action=act{ActivateTab=4}},
-    { key = "6", mods = "LEADER",       action=act{ActivateTab=5}},
-    { key = "7", mods = "LEADER",       action=act{ActivateTab=6}},
-    { key = "8", mods = "LEADER",       action=act{ActivateTab=7}},
-    { key = "9", mods = "LEADER",       action=act{ActivateTab=8}}
+	-- tmux tab index activation. ctrl-b #
+	{ key = "1", mods = "LEADER", action = act({ ActivateTab = 0 }) },
+	{ key = "2", mods = "LEADER", action = act({ ActivateTab = 1 }) },
+	{ key = "3", mods = "LEADER", action = act({ ActivateTab = 2 }) },
+	{ key = "4", mods = "LEADER", action = act({ ActivateTab = 3 }) },
+	{ key = "5", mods = "LEADER", action = act({ ActivateTab = 4 }) },
+	{ key = "6", mods = "LEADER", action = act({ ActivateTab = 5 }) },
+	{ key = "7", mods = "LEADER", action = act({ ActivateTab = 6 }) },
+	{ key = "8", mods = "LEADER", action = act({ ActivateTab = 7 }) },
+	{ key = "9", mods = "LEADER", action = act({ ActivateTab = 8 }) },
 }
 
-
-
 return config
+
+-- vim: noet sw=4 ts=4
