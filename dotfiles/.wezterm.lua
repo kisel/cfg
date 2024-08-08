@@ -6,7 +6,6 @@ local mux = wezterm.mux
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
-local c = config
 
 -- config.font = wezterm.font("JetBrains Mono")
 -- config.font = wezterm.font("Consolas")
@@ -18,6 +17,8 @@ config.font = wezterm.font_with_fallback({
 })
 
 config.font_size = 12.0
+config.warn_about_missing_glyphs = false
+
 --config.color_scheme = 'AdventureTime'
 --config.color_scheme = 'Batman'
 --config.color_scheme = 'Red Scheme'
@@ -95,11 +96,11 @@ wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
 end)
 
 -- true - graphical tabs. false - text tabs
-c.use_fancy_tab_bar = false
-c.show_new_tab_button_in_tab_bar = true
+config.use_fancy_tab_bar = false
+config.show_new_tab_button_in_tab_bar = true
 
---c.color_scheme = "carbonfox"
---c.color_scheme = 'Batman'
+--config.color_scheme = "carbonfox"
+--config.color_scheme = 'Batman'
 
 -- wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 --   -- local palette = config.resolved_palette.tab_bar
