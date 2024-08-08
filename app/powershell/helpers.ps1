@@ -13,4 +13,5 @@ Set-Alias k     kubectl
 Set-Alias v     nvim
 
 function l     { eza --color=auto --icons=auto $args }
+function ll     { eza --color=auto --icons=auto -l $args }
 

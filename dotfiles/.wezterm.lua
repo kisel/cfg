@@ -17,6 +17,7 @@ config.font = wezterm.font_with_fallback({
 	"0xProto Nerd Font Mono",
 })
 
+config.font_size = 12.0
 --config.color_scheme = 'AdventureTime'
 --config.color_scheme = 'Batman'
 --config.color_scheme = 'Red Scheme'
