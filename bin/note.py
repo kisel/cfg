@@ -1,6 +1,7 @@
 import subprocess
 import argparse
 import os
+import re
 
 parser = argparse.ArgumentParser(description="Open/Create notes")
 parser.add_argument('query', nargs='*', type=str, help='note search query')
