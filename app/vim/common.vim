@@ -17,6 +17,11 @@ set belloff=all
 " show numbers on netrw. :help netrw-P18
 let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
 autocmd FileType netrw setlocal number
+" - to edit
+nnoremap - :Ex<CR>
+
+" <leader>q to delete buffer
+nnoremap <leader>q :bd<CR>
 
 
 syntax on
