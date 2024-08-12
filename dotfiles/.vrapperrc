@@ -1,5 +1,7 @@
+" vim: ft=vim
 " ~/.vrapperrc - cfg for eclipse
 " https://vrapper.sourceforge.net/documentation/?topic=configuration
+" Pre-requirements: unbind Ctrl-v, F5, F10, F11
 
 set ignorecase
 set smartcase
@@ -35,6 +37,11 @@ set gvimpath="neovide"
 set gvimargs=+normal{line}G{col}lh {file}
 " https://github.com/vrapper/vrapper/blob/290ab13be7bab5ca4bfe1b76d72a76c71002866d/plugins/net.sourceforge.vrapper.eclipse/src/net/sourceforge/vrapper/eclipse/platform/EclipseFileService.java#L53
 
+" Bind eclipse actions to vim commands and use with nmap
+" eclipseaction!  -- Binds the Eclipse action with the specified id to a (command line mode) command <name>.
+" ! - overrides existing binding
+" eclipseuiaction! -- same as eclipseuiaction, except it handles commands which display (or may display) a popup or dialog.
+"
 " see this repo for action references
 " https://github.com/MarcoIeni/spaceclipse
 " another option to find action IDs - export Keys to CSV
@@ -42,8 +49,6 @@ set gvimargs=+normal{line}G{col}lh {file}
 " :bookmark
 " https://help.eclipse.org/2024-06/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Freference%2Fapi%2Forg%2Feclipse%2Fui%2FIWorkbenchCommandConstants.html&anchor=EDIT_ADD_BOOKMARK
 eclipseaction! bookmark org.eclipse.ui.edit.addBookmark
-
-
 
 "show parent file directory in system explorer
 eclipseaction! showexp org.eclipse.ui.ide.showInSystemExplorer
@@ -53,7 +58,6 @@ eclipseaction! ref org.eclipse.jdt.ui.edit.text.java.search.references.in.worksp
 " or just use Ctrl-1 standard eclipse hotkey
 eclipseuiaction! fix    org.eclipse.jdt.ui.edit.text.java.correction.assist.proposals
 " or just use Ctrl-Shift-R standard eclipse hotkey
-eclipseaction! resource  org.eclipse.ui.navigate.openResource
 
 eclipseaction! getter   org.eclipse.jdt.ui.edit.text.java.create.getter.setter
 eclipseaction! tostring  org.eclipse.jdt.ui.edit.text.java.generate.tostring
@@ -61,21 +65,56 @@ eclipseaction! overridemethods         org.eclipse.jdt.ui.edit.text.java.overrid
 
 eclipseaction! breadcrumb   org.eclipse.jdt.ui.edit.text.java.gotoBreadcrumb
 eclipseaction! tbreadcrumb          org.eclipse.jdt.ui.edit.text.java.toggleBreadcrumb
-eclipseaction! outline          org.eclipse.jdt.ui.edit.text.java.show.outline
+eclipseuiaction! outline          org.eclipse.jdt.ui.edit.text.java.show.outline
 eclipseaction! revertline  org.eclipse.ui.editors.quickdiff.revertLine
-nnoremap U :revertline<ENTER>
 "eclipseaction! revertselection org.eclipse.ui.editors.quickdiff.revert
 
 " show documentation for current symbol
 eclipseuiaction! eclipseshowdoc org.eclipse.ui.edit.text.showInformation
-nnoremap K   :eclipseshowdoc<cr>
 
 "eclipseaction! properties  org.eclipse.ui.file.properties
 eclipseaction! trycatch  org.eclipse.jdt.ui.edit.text.java.surround.with.try.catch
-eclipseaction! rulermenu  org.eclipse.ui.edit.text.showRulerContextMenu
+
+" this shows dialog to pick a perspective
 eclipseaction! perspective  org.eclipse.ui.window.nextPerspective
-eclipseaction! view   org.eclipse.ui.window.previousView
-eclipseaction!   search          org.eclipse.search.ui.openFileSearchPage
+
+eclipseaction! eclipserefactormenu org.eclipse.jdt.ui.edit.text.java.refactor.quickMenu
+eclipseaction! eclipserename org.eclipse.jdt.ui.edit.text.java.rename.element
+"
+" amazing 'omnibox' that searches buffers, commands, views, menus, preferences, etc.
+eclipseuiaction! search_action org.eclipse.ui.window.quickAccess
+
+
+
+eclipseuiaction! eclipseopenresource org.eclipse.ui.navigate.openResource
+
+" https://github.com/vrapper/vrapper/issues/352
+eclipseaction! eclipsenextmember org.eclipse.jdt.ui.edit.text.java.goto.next.member
+eclipseaction! eclipseprevmember org.eclipse.jdt.ui.edit.text.java.goto.previous.member
+
+" Toggle breakpoint
+eclipseaction! debug_toggleBreakpoint org.eclipse.debug.ui.commands.ToggleBreakpoint
+
+" Debug
+eclipseaction! debug org.eclipse.debug.ui.commands.DebugLast
+eclipseaction! debug_run org.eclipse.debug.ui.commands.RunLast
+eclipseaction! debug_resume org.eclipse.debug.ui.commands.Resume
+eclipseaction! debug_kill org.eclipse.debug.ui.commands.Terminate
+
+eclipseaction! debug_step_into org.eclipse.debug.ui.commands.StepInto
+eclipseaction! debug_step_over org.eclipse.debug.ui.commands.StepOver
+eclipseaction! debug_step_out org.eclipse.debug.ui.commands.StepReturn
+"
+eclipseaction! debug_cfg org.eclipse.debug.ui.commands.OpenDebugConfigurations
+"
+" Next bookmark
+eclipseaction! openfmhere org.eclipse.ui.ide.showInSystemExplorer
+eclipseaction! :junit org.eclipse.jdt.junit.junitShortcut.debug
+
+eclipseaction! eclipserename org.eclipse.jdt.ui.edit.text.java.rename.element
+
+nnoremap U :revertline<ENTER>
+nnoremap K :eclipseshowdoc<cr>
 
 " :noh on ESC
 nnoremap <ESC> :nohlsearch<CR>
@@ -85,96 +124,58 @@ nnoremap x "_x
 nnoremap c "_c
 
 "show refactor menu
-eclipseaction! eclipserefactormenu org.eclipse.jdt.ui.edit.text.java.refactor.quickMenu
 nnoremap crr        :eclipserefactormenu<cr>
 vnoremap <c-r><c-r> :eclipserefactormenu<cr>gv
 
 " rename current symbol
-eclipseaction! eclipserename org.eclipse.jdt.ui.edit.text.java.rename.element
 nnoremap crn :eclipserename<cr>
 
-" amazing 'omnibox' that searches buffers, commands, views, menus, preferences, etc.
-eclipseuiaction! eclipsecmdsearch org.eclipse.ui.window.quickAccess
-nnoremap <space>m :eclipsecmdsearch<cr>
+nnoremap <space>m :search_action<cr>
 
 
 " open file manager here (requires Eclipse 4.4/Luna)
-eclipseaction! openfmhere org.eclipse.ui.ide.showInSystemExplorer
 nnoremap gof :openfmhere<cr>
 
 
-" open terminal here
-"eclipseaction! opentermhere com.tetrade.eclipse.plugins.easyshell.command.shellOpen
-"nnoremap got :opentermhere<cr>
-
-eclipseuiaction! eclipseopenresource org.eclipse.ui.navigate.openResource
-nnoremap <c-p> :eclipseopenresource<cr>
-
-
-" https://github.com/vrapper/vrapper/issues/352
-eclipseaction! eclipsenextmember org.eclipse.jdt.ui.edit.text.java.goto.next.member
 nnoremap ]] :eclipsenextmember<cr>
-eclipseaction! eclipseprevmember org.eclipse.jdt.ui.edit.text.java.goto.previous.member
 nnoremap [[ :eclipseprevmember<cr>
 
-" Toggle breakpoint
-eclipseaction! debug_toggleBreakpoint org.eclipse.debug.ui.commands.ToggleBreakpoint
-nnoremap <leader>mdb    :debug_toggleBreakpoint<cr>
+" easy marks <leader>1..5
+noremap m1 mQ
+noremap m2 mW
+noremap m3 mE
+noremap m4 mR
+noremap m5 mT
+
+noremap <space>1 `Q
+noremap <space>2 `W
+noremap <space>3 `E
+noremap <space>4 `R
+noremap <space>5 `T
+
+nnoremap <c-p> :eclipseopenresource<cr>
+noremap <space>ff :eclipseopenresource<cr>
+noremap <space>fo :outline<cr>
+
+noremap <space>wq :bd<CR>
+noremap <c-w>p :perspective<CR>
+
+nnoremap <space>rn :eclipserename<cr>
 
 
-" eclipseaction!  -- Binds the Eclipse action with the specified id to a (command line mode) command <name>.
-" ! - overrides existing binding
-" eclipseuiaction! -- same as eclipseuiaction, except it handles commands which display (or may display) a popup or dialog.
-"
-"
-eclipseaction! debug org.eclipse.debug.ui.commands.DebugLast
-eclipseaction! debug_kill org.eclipse.debug.ui.commands.Terminate
+" Replace word under cursor
+nnoremap <leader>rw :%s/<c-r><c-w>/<c-r><c-w>/gc<left><left><left>
 
-"eclipseaction! debug_step org.eclipse.debug.ui.commands.StepInto
-"eclipseaction! debug_next org.eclipse.debug.ui.commands.StepOver
-"eclipseaction! debug_out org.eclipse.debug.ui.commands.StepReturn
-"
-"eclipseaction! debug_cfg org.eclipse.debug.ui.commands.OpenDebugConfigurations
-"
-"
-eclipseaction! applications_shellLaunch org.eclipse.tm.terminal.view.ui.command.launch
-" Next bookmark
-"au "C/C++ Editor" eclipseaction! bookmarks_next org.eclipse.cdt.ui.edit.text.c.goto.next.bookmark
-eclipseaction! bookmarks_next org.eclipse.cdt.ui.edit.text.c.goto.next.bookmark
+" Visual-Studio-like debug hotkeys
+" https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf
+nnoremap <F5> :debug_resume<cr>
+nnoremap <A-F5> :debug_run<cr>
+nnoremap <C-F5> :debug<cr>
+nnoremap <S-F5> :debug_kill<cr>
 
-" Jump to class
-au "Java Editor" eclipseaction! jump_class org.eclipse.jdt.ui.navigate.open.type
-nnoremap <leader>jc    :jump_class<cr>
-vnoremap <leader>jc    :jump_class<cr>
+nnoremap <F9>     :debug_toggleBreakpoint<cr>
+nnoremap <F10>     :debug_step_over<cr>
+nnoremap <F11> :debug_step_into<cr>
+nnoremap <S-F11> :debug_step_out<cr>
 
-" Jump to element in current file
-au "Java Editor" eclipseuiaction! jump_element org.eclipse.jdt.ui.edit.text.java.show.outline
-au "C/C++ Editor" eclipseuiaction! jump_element org.eclipse.cdt.ui.edit.open.outline
-nnoremap <leader>je    :jump_element<cr>
-vnoremap <leader>je    :jump_element<cr>
-"
-eclipseaction! :junit org.eclipse.jdt.junit.junitShortcut.debug
-
-" easy marks
-noremap mq mQ
-noremap mw mW
-noremap me mE
-noremap mr mR
-noremap mt mT
-
-noremap `q `Q
-noremap `w `W
-noremap `e `E
-noremap `r `R
-noremap `t `T
-
-noremap <space>q `Q
-noremap <space>w `W
-noremap <space>e `E
-noremap <space>r `R
-noremap <space>t `T
-
-
-
-" vim: ft=vim
 
