@@ -1,15 +1,13 @@
 # pretend it's a bash shell
+# this was a bad idea. installing real commands instead
+#
+# scoop install busybox
 
-Set-Alias grep Select-String
-Set-Alias open Invoke-Item
-Set-Alias less more
+# Set-Alias grep Select-String
+# Set-Alias open Invoke-Item
+# Set-Alias less more
 Set-Alias time Measure-Command
 Set-Alias which Get-Command
-
-# zsh-style cd
-function .. { cd .. }
-function ... { cd ../.. }
-function .... { cd ../../.. }
 
 #Function head($fn) {
 #        Get-Content -Path $fn -ReadCount 32 | Format-List | more
@@ -41,9 +39,9 @@ function watch() {
 
 
 # tail -f <filename>
-function tail() {
-    Get-Content -Wait $args[-1]
-}
+# function tail() {
+#     Get-Content -Wait $args[-1]
+# }
 
 function ts() {
     ForEach-Object { Get-Date -Format "yyyy-MM-dd HH:mm:ss" } ; $_
