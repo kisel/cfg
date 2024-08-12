@@ -1,11 +1,16 @@
 import argparse
 import psutil
+import os
 
 def top_memory_processes(n=10, propname=None):
     pgrp = {}
     processes = []
+    # https://psutil.readthedocs.io/en/latest/index.html#psutil.Process.memory_info
     if propname is None:
-        propname = 'rss'
+        if os.name == "nt":
+            propname = 'private'
+        else: # posix
+            propname = 'rss'
     for p in psutil.process_iter():
         try:
             name = p.name()
