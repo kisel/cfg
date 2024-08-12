@@ -7,13 +7,16 @@ local mux = wezterm.mux
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- config.font = wezterm.font("JetBrains Mono")
--- config.font = wezterm.font("Consolas")
--- config.font = wezterm.font("0xProto Nerd Font Mono")
---
+-- https://www.nerdfonts.com/font-downloads
+-- wezterm ls-fonts --list-system|grep
 config.font = wezterm.font_with_fallback({
-	"Consolas",
-	"0xProto Nerd Font Mono",
+	{ family = "Hack Nerd Font Mono", weight = "Regular" }, -- looks quite nice
+	--{ family = "Iosevka Nerd Font", weight = "Regular" }, -- huge install, small width
+	"Consolas", -- linux? glyphs?
+	"JetBrains Mono", -- glyphs?
+	-- { family = "FiraCode Nerd Font Mono", weight = "Regular" }, -- wierd 'www'
+	-- { family = "CaskaydiaCove Nerd Font Mono", weight = "Regular" }, -- too fat, wierd '--'
+	-- "0xProto Nerd Font Mono", -- delete? just for glyphs
 })
 
 config.font_size = 12.0
