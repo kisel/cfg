@@ -169,8 +169,8 @@ nnoremap <leader>rw :%s/<c-r><c-w>/<c-r><c-w>/gc<left><left><left>
 " Visual-Studio-like debug hotkeys
 " https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf
 nnoremap <F5> :debug_resume<cr>
-nnoremap <A-F5> :debug_run<cr>
-nnoremap <C-F5> :debug<cr>
+nnoremap <A-F5> :debug<cr>
+nnoremap <C-F5> :debug_run<cr>
 nnoremap <S-F5> :debug_kill<cr>
 
 nnoremap <F9>     :debug_toggleBreakpoint<cr>
