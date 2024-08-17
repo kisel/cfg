@@ -15,6 +15,9 @@ Set-PSReadlineKeyHandler -Key ctrl+l -Function ClearScreen
 # Accept Completion with ctrl-y
 Set-PSReadlineKeyHandler -Key ctrl+y -Function Complete
 
+# Disable bell sound
+Set-PSReadlineOption -BellStyle None
+
 # see also
 # https://learn.microsoft.com/en-us/powershell/module/psreadline/about/about_psreadline_functions?view=powershell-7.4
 # Alt+= - possible completions

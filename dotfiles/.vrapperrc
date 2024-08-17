@@ -69,6 +69,9 @@ eclipseuiaction! outline          org.eclipse.jdt.ui.edit.text.java.show.outline
 eclipseaction! revertline  org.eclipse.ui.editors.quickdiff.revertLine
 "eclipseaction! revertselection org.eclipse.ui.editors.quickdiff.revert
 
+eclipseuiaction! eclipseprevtab org.eclipse.ui.navigate.previousTab
+eclipseuiaction! eclipsenexttab org.eclipse.ui.navigate.nextTab
+
 " show documentation for current symbol
 eclipseuiaction! eclipseshowdoc org.eclipse.ui.edit.text.showInformation
 
@@ -104,6 +107,8 @@ eclipseaction! debug_kill org.eclipse.debug.ui.commands.Terminate
 eclipseaction! debug_step_into org.eclipse.debug.ui.commands.StepInto
 eclipseaction! debug_step_over org.eclipse.debug.ui.commands.StepOver
 eclipseaction! debug_step_out org.eclipse.debug.ui.commands.StepReturn
+eclipseaction! debug_run_to_line org.eclipse.debug.ui.commands.RunToLine
+
 "
 eclipseaction! debug_cfg org.eclipse.debug.ui.commands.OpenDebugConfigurations
 "
@@ -161,6 +166,10 @@ noremap <space>wq :bd<CR>
 noremap <c-w>p :perspective<CR>
 
 nnoremap <space>rn :eclipserename<cr>
+
+" default behavior shows wrong tabs somehow
+nmap gt :eclipsenexttab<CR>
+nmap gT :eclipseprevtab<CR>
 
 
 " Replace word under cursor
