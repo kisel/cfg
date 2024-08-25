@@ -13,3 +13,5 @@ git clone git@github.com:kisel/cfg.git .cfg
 #cd ~/.cfg
 #git remote add cfg-ssh git@github.com:kisel/cfg.git
 ```
+
+

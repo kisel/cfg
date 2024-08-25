@@ -50,7 +50,9 @@ config.audible_bell = "Disabled"
 -- config.default_gui_startup_args = { 'connect', 'unix' }
 
 config.default_domain = "unix"
-config.default_prog = { "pwsh", "-nologo" }
+if wezterm.target_triple:find("windows") ~= nil then
+  config.default_prog = { "pwsh", "-nologo" }
+end
 
 -- maximized window on 0,0 instead of somewhere centered
 wezterm.on("gui-startup", function(cmd)
