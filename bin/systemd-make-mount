@@ -1,0 +1,30 @@
+#!/bin/sh
+
+src="$1"
+dst="$2"
+
+name="$(echo "$dst" | sed 's/\//-/g;s/^-//;s/-$//')"
+file=/etc/systemd/system/$name.mount
+
+echo "Name: $name"
+echo "File: $file"
+
+tee /tmp/$name.mount <<END
+[Unit]
+Description=mount $dst
+
+[Mount]
+What=$src
+Where=$dst
+
+[Install]
+WantedBy=multi-user.target
+
+END
+
+vim /tmp/$name.mount
+
+sudo mv /tmp/$name.mount $file
+sudo systemctl enable --now $name.mount
+
+
