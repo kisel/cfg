@@ -1,3 +1,7 @@
+" pure universal vimrc configuration without any pluging
+" can be installed as root's vimrc
+"
+" sudo cp common.vim /root/.vimrc
 set nocompatible
 set background=dark
 
@@ -13,6 +17,10 @@ set hidden
 
 " disable bell
 set belloff=all
+
+" nu + rnu: relative numbers and show current line num instead of 0
+set nu
+set rnu
 
 " show numbers on netrw. :help netrw-P18
 let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
@@ -35,14 +43,6 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0#
 " yaml indent (still not great)
 autocmd FileType yaml setlocal foldmethod=indent foldlevel=9
 autocmd FileType go setlocal noexpandtab
-
-if has("gui_running")
-  " Maximize gvim window
-  set lines=999 columns=999
-
-  " unlike in terminal, in gui I always want to have line numbers
-  se nu
-endif
 
 set incsearch
 set hlsearch

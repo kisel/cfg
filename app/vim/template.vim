@@ -3,6 +3,10 @@ source $HOME/.cfg/app/vim/common.vim
 " use OS clipboard by default for easy copy-paste without "* "+
 set clipboard^=unnamed
 
+" nu + rnu: relative numbers and show current line num instead of 0
+set nu
+set rnu
+
 " Clipboard with Ctrl-Shift-C/V
 if has("gui_running") 
     "nnoremap <C-S-c> "+y
@@ -50,8 +54,8 @@ try
     " https://github.com/junegunn/fzf.vim?tab=readme-ov-file#commands
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    nmap <C-P> :FZF<CR>
-
+    nnoremap <C-P> :FZF<CR>
+    nnoremap <space>ff :FZF<CR>
 
     Plug 'tpope/vim-fugitive'
     Plug 'ghifarit53/tokyonight-vim'

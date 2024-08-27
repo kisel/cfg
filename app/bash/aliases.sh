@@ -1,6 +1,14 @@
 alias ssha='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 alias scpa='scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
+alias g=git
+alias k=kubectl
+alias v=nvim
+alias l=eza
+alias ll=eza -l
+
+
+
 # mkdircd <taget>
 # mkdirp + cd
 mkdircd() {

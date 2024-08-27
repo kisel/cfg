@@ -1,48 +1,55 @@
+# vim:ft=gitconfig:noet:sw=8:ts=8
+# stay compatible with git config
+#
 [user]
-    name = Anton Kiselev
-    # git config --global user.email
-    # email = 
+	name = Anton Kiselev
+	# git config --global user.email
+	# or use per-repo
+	# git config user.email
+	# email =
 
 [alias]
-    co = checkout
-    sw = switch
-    st = status
-    sta = stash
-    br = branch
-    ci = commit
-    cia = commit -a
-    fix = commit --amend
-    wip = commit -m wip
-    cp = cherry-pick
-    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    di = diff
-    mt = mergetool
-    me = merge
-    rb = rebase
-    rbc = rebase --continue
-    rbs = rebase --skip
-    rba = rebase --abort
-    dica = diff --cached
-    gcfg = config --global
-    rehard = reset --hard
-    tip = log -1 --decorate
-    meff = merge --ff-only
-    mesq = merge --squash
-    puo = push origin
+	co = checkout
+	sw = switch
+	st = status
+	sta = stash
+	br = branch
+	ci = commit
+	cia = commit -a
+	fix = commit --amend
+	wip = commit -m wip
+	cp = cherry-pick
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	di = diff
+	mt = mergetool
+	me = merge
+	rb = rebase
+	rbc = rebase --continue
+	rbs = rebase --skip
+	rba = rebase --abort
+	dica = diff --cached
+	rehard = reset --hard
+	tip = log -1 --decorate
+	meff = merge --ff-only
+	puo = push origin
+	
 
+[init]
+	defaultBranch = master
 
 [core]
-    # autocrlf = true
-    # safecrlf = true
-    # longpaths = true
-    # sshCommand = 
-    # excludesfile = ~/.gitignore
-    # excludesfile = ~/.cfg/app/git/gitignore_common
+	# autocrlf = true
+	# safecrlf = true
+	# longpaths = true
+	# sshCommand =
+	# excludesfile = ~/.gitignore
+	# excludesfile = ~/.cfg/app/git/gitignore_common
 
 #[filter "lfs"]
-#    clean = git-lfs clean -- %f
-#    smudge = git-lfs smudge -- %f
-#    process = git-lfs filter-process
-#    process = 
-#    required = true
+	#    clean = git-lfs clean -- %f
+	#    smudge = git-lfs smudge -- %f
+	#    process = git-lfs filter-process
+	#    process =
+	#    required = true
+	
 
