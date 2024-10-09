@@ -4,12 +4,12 @@ Dotfiles and common scripts
 
 ### Clone HTTPS
 ```
-git clone https://github.com/kisel/cfg.git ~/.git
+git clone https://github.com/kisel/cfg.git ~/.cfg
 ```
 
 ### Clone SSH
 ```
-git clone git@github.com:kisel/cfg.git .cfg
+git clone git@github.com:kisel/cfg.git ~/.cfg
 #cd ~/.cfg
 #git remote add cfg-ssh git@github.com:kisel/cfg.git
 ```
