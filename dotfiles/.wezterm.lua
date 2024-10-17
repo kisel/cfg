@@ -50,8 +50,11 @@ config.audible_bell = "Disabled"
 -- config.default_gui_startup_args = { 'connect', 'unix' }
 
 config.default_domain = "unix"
+
 if wezterm.target_triple:find("windows") ~= nil then
   config.default_prog = { "pwsh", "-nologo" }
+  -- allows using ssh-agent on Windows unlike the default "Libssh"
+  config.ssh_backend = "Ssh2"
 end
 
 -- maximized window on 0,0 instead of somewhere centered
@@ -166,6 +169,9 @@ config.keys = {
 	-- tmux new tab ctrl-b c
 	{ key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "y", mods = "LEADER", action = wezterm.action.SpawnCommandInNewTab({
+		args = { "cmd.exe" },
+	}) },
+	{ key = "y", mods = "CTRL|SHIFT", action = wezterm.action.SpawnCommandInNewTab({
 		args = { "cmd.exe" },
 	}) },
 
