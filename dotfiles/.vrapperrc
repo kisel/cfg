@@ -1,7 +1,7 @@
 " vim: ft=vim
 " ~/.vrapperrc - cfg for eclipse
 " https://vrapper.sourceforge.net/documentation/?topic=configuration
-" Pre-requirements: unbind Ctrl-v, F5, F10, F11
+" Pre-requirements: unbind Ctrl-u, Ctrl-d, Ctrl-v, F5, F10, F11
 
 set ignorecase
 set smartcase
