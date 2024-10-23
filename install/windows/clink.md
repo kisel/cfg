@@ -4,6 +4,8 @@
 
 https://github.com/chrisant996/clink/releases
 
+can also be installed with `choco install -y clink-maintained`
+
 #### Config to be bash-like
 
 ```bash
