@@ -1,7 +1,9 @@
 # These should not be installed with scoop
 # as I want "Open with" and file association to work properly
-choco install -y mpv
 choco install -y vlc
+choco install -y mpv
+# yt-dlp provides youtube support for mpv
+choco install -y yt-dlp
 
 
 # install GUI for mpv

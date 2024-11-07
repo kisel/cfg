@@ -6,7 +6,7 @@
 .  $HOME/.cfg/app/powershell/win-system.ps1
 .  $HOME/.cfg/app/powershell/msys.ps1
 .  $HOME/.cfg/app/powershell/yazi.ps1
-.  $HOME/.cfg/app/powershell/fd-fzf.ps1
+.  $HOME/.cfg/app/powershell/helpers.ps1
 
 Set-PSReadlineOption -EditMode Emacs
 Set-Alias g git

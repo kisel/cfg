@@ -4,8 +4,8 @@
 # scoop install busybox
 
 # Set-Alias grep Select-String
-# Set-Alias open Invoke-Item
 # Set-Alias less more
+Set-Alias open Invoke-Item
 Set-Alias time Measure-Command
 Set-Alias which Get-Command
 

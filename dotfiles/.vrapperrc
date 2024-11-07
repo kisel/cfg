@@ -2,6 +2,7 @@
 " ~/.vrapperrc - cfg for eclipse
 " https://vrapper.sourceforge.net/documentation/?topic=configuration
 " Pre-requirements: unbind Ctrl-u, Ctrl-d, Ctrl-v, Ctrl-w, Ctrl-p, F5, F10, F11
+" Ctrl-O, Ctrl-i
 
 set ignorecase
 set smartcase
@@ -29,11 +30,14 @@ set clipboard=unnamed
 
 " opens gvim by :vim command
 " on windows vrapper can only find gvim.bat. see :r! gvim.bat
-"set gvimpath="gvim.bat"
+" https://vrapper.sourceforge.net/documentation/?topic=commandline_commands
+" :r!<command>	Execute a shell command and insert the output.
+"set gvimpath=gvim.bat
 "set gvimargs=+{line} -c normal zv{col}| -c set nobackup -f -n {file}
 
 " gvim/neovide have different args format. this works from nvim only
-set gvimpath="neovide"
+set gvimpath=neovide
+set gvimpath=C:/Program Files/Neovide/neovide.exe
 set gvimargs=+normal{line}G{col}lh {file}
 " https://github.com/vrapper/vrapper/blob/290ab13be7bab5ca4bfe1b76d72a76c71002866d/plugins/net.sourceforge.vrapper.eclipse/src/net/sourceforge/vrapper/eclipse/platform/EclipseFileService.java#L53
 

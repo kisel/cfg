@@ -2,6 +2,10 @@
 scoop install uutils-coreutils
 scoop install grep
 
+# less pager can be used automatically by some apps including bat
+scoop install less
+scoop install bat
+
 # busybox-lean is a single busybox binary, to not conflict with coreutils
 scoop install busybox-lean
 
