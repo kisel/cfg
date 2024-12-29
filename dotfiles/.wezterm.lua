@@ -41,6 +41,7 @@ config.unix_domains = {
 	},
 }
 
+config.check_for_updates = false
 config.audible_bell = "Disabled"
 
 -- This causes `wezterm` to act as though it was started as
@@ -163,8 +164,8 @@ config.keys = {
 
 	-- tmux new tab ctrl-b c
 	{ key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
-	{ key = "y", mods = "LEADER", action = wezterm.action.SpawnCommandInNewTab({
-		args = { "cmd.exe" },
+	{ key = "y", mods = "CTRL|SHIFT", action = wezterm.action.SpawnCommandInNewTab({
+		args = { "cmd.exe" }, -- make sure to also install clink. pure cmd is garbage
 	}) },
 
 	-- vim ctrl-w splits
