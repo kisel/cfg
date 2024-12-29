@@ -2,6 +2,7 @@
 " ~/.vrapperrc - cfg for eclipse
 " https://vrapper.sourceforge.net/documentation/?topic=configuration
 " Pre-requirements: unbind Ctrl-v, F5, F10, F11
+" also get some actions from ~/.cfg/app/eclipse/eclipse-vim-friendly-vscode-like-keys.csv
 
 set ignorecase
 set smartcase
@@ -80,6 +81,7 @@ eclipseaction! trycatch  org.eclipse.jdt.ui.edit.text.java.surround.with.try.cat
 
 " this shows dialog to pick a perspective
 eclipseaction! perspective  org.eclipse.ui.window.nextPerspective
+eclipseaction! eclipsezoom org.eclipse.ui.window.maximizePart
 
 eclipseaction! eclipserefactormenu org.eclipse.jdt.ui.edit.text.java.refactor.quickMenu
 eclipseaction! eclipserename org.eclipse.jdt.ui.edit.text.java.rename.element
@@ -87,7 +89,8 @@ eclipseaction! eclipserename org.eclipse.jdt.ui.edit.text.java.rename.element
 " amazing 'omnibox' that searches buffers, commands, views, menus, preferences, etc.
 eclipseuiaction! search_action org.eclipse.ui.window.quickAccess
 
-
+" search in open editor
+eclipseaction! eclipse_find_editor org.eclipse.ui.window.openEditorDropDown
 
 eclipseuiaction! eclipseopenresource org.eclipse.ui.navigate.openResource
 
@@ -135,6 +138,7 @@ vnoremap <c-r><c-r> :eclipserefactormenu<cr>gv
 " rename current symbol
 nnoremap crn :eclipserename<cr>
 
+" action search menu
 nnoremap <space>m :search_action<cr>
 
 
@@ -160,11 +164,17 @@ noremap <space>5 `T
 
 nnoremap <c-p> :eclipseopenresource<cr>
 noremap <space>ff :eclipseopenresource<cr>
+noremap <space><space> :eclipse_find_editor<cr>
+
 noremap <space>fo :outline<cr>
 
 noremap <space>wq :bd<CR>
 noremap <c-w>p :perspective<CR>
+noremap <c-w>z :eclipsezoom<CR>
 
+" Refactor Rename
+nnoremap <space>rr :eclipserename<cr>
+" Refactor Name
 nnoremap <space>rn :eclipserename<cr>
 
 " default behavior shows wrong tabs somehow
@@ -187,4 +197,9 @@ nnoremap <F10>     :debug_step_over<cr>
 nnoremap <F11> :debug_step_into<cr>
 nnoremap <S-F11> :debug_step_out<cr>
 
+nnoremap <S-F10>     :debug_run_to_line<cr>
+
+" Eclipse default for run to line is C-r, but vim uses it for undo-redo
+nnoremap <space>dr     :debug_run_to_line<cr>
+noremap <space>vr source ~/.vrapperrc<CR>
 
