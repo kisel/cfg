@@ -1,4 +1,5 @@
-*	text=auto
-*.bat	text=crlf
-*.cmd	text=crlf
+*            text=auto
+*.bat        text=crlf
+*.cmd        text=crlf
+.gitconfig   text=lf
 

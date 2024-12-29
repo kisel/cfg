@@ -65,6 +65,9 @@ set scrolloff=3
 "always hide swap files
 let g:netrw_list_hide= '^\..*\.sw[op]$'
 
+" disable swap and undo files to avoid creating .swp and .un~ files
+set noswapfile
+set noundofile
 
 " paste over something keeping the register. "_P
 xmap <leader>p "_dP

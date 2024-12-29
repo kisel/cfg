@@ -28,16 +28,20 @@ endif
 if has("gui_running")
   " Maximize gvim window
   set lines=999 columns=999
-
-  " unlike in terminal, in gui I always want to have line numbers
-  se nu
-
 endif
 
+" line numbers + relative
+se nu
+se rnu
+
 " assuming plug.vim is auto-loaded from
-"   windown location : ~\vimfiles\autoload\plug.vim
-"   linux location: ~\.vim\autoload\plug.vim
-" install:
+"   Windown location : ~\vimfiles\autoload\plug.vim
+"   Linux location: ~\.vim\autoload\plug.vim
+" install Linux:
+"   curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" install Windows:
+"   curl -fLo $HOME/vimfiles/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"
 " -   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 " -   https://github.com/junegunn/vim-plug?tab=readme-ov-file#installation
 "
@@ -55,6 +59,7 @@ try
 
     Plug 'tpope/vim-fugitive'
     Plug 'ghifarit53/tokyonight-vim'
+    Plug 'tomasiser/vim-code-dark'
 
     call plug#end()
 catch /Unknown function/
@@ -66,13 +71,21 @@ endtry
 " 24bit colors support
 set termguicolors
 
-" available by default
-"colo slate
-"colo koehler
-"colo industry
-"colo ron
-"colo torte
-"colo zaibatsu
-colo tokyonight
-"colo wildcharm " don't see a selection on wildcharm. the following line is a fixup
-"hi Visual ctermfg=NONE ctermbg=59 cterm=reverse
+try
+    " available by default
+    "colo slate
+    "colo koehler
+    "colo industry
+    "colo ron
+    "colo torte
+
+    " installed
+    " colo tokyonight
+    colo codedark
+
+    "colo wildcharm " don't see a selection on wildcharm. the following line is a fixup
+    "hi Visual ctermfg=NONE ctermbg=59 cterm=reverse
+catch /Cannot find/
+    colo industry
+endtry
+

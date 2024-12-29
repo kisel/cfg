@@ -1,6 +1,7 @@
+alias l=eza
+alias ll=eza -l
 alias k=kubectl
 alias g=git
-export EDITOR="vim"
 
 # zsh:
 # source <(fzf --zsh)

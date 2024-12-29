@@ -7,9 +7,8 @@ if [ -f $AGENTFILE ] ; then
     . $AGENTFILE
 fi
 
-if [ ! -e "$SSH_AUTH_SOCK" ] || [ ! -e "/proc/$SSH_AGENT_PID/exename" ] ; then
-    # can also check /proc/$SSH_AGENT_PID/exename = /usr/bin/ssh-agent
-    echo "Running new agent"
+if [ ! -e "$SSH_AUTH_SOCK" ] || [ ! -e "/proc/$SSH_AGENT_PID/" ] ; then
+    echo "Running new ssh-agent"
     ssh-agent | grep -v echo > $AGENTFILE
     . $AGENTFILE
 fi

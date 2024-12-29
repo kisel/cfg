@@ -51,7 +51,12 @@ config.audible_bell = "Disabled"
 -- config.default_gui_startup_args = { 'connect', 'unix' }
 
 config.default_domain = "unix"
-config.default_prog = { "pwsh", "-nologo" }
+
+if wezterm.target_triple:find("windows") ~= nil then
+  config.default_prog = { "pwsh", "-nologo" }
+  -- allows using ssh-agent on Windows unlike the default "Libssh"
+  config.ssh_backend = "Ssh2"
+end
 
 -- maximized window on 0,0 instead of somewhere centered
 wezterm.on("gui-startup", function(cmd)
@@ -166,6 +171,9 @@ config.keys = {
 	{ key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "y", mods = "CTRL|SHIFT", action = wezterm.action.SpawnCommandInNewTab({
 		args = { "cmd.exe" }, -- make sure to also install clink. pure cmd is garbage
+	}) },
+	{ key = "y", mods = "CTRL|SHIFT", action = wezterm.action.SpawnCommandInNewTab({
+		args = { "cmd.exe" },
 	}) },
 
 	-- vim ctrl-w splits

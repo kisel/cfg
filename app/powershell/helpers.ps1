@@ -5,11 +5,20 @@ function mkdircd {
     cd $args[0]
 }
 
-Set-Alias lg    lazygit   
-Set-Alias ls    eza      
-Set-Alias gui   gitui    
-Set-Alias g     git      
-Set-Alias k     kubectl 
+# cdp $(fzf)
+function cdp {
+    cd $(Split-Path -Parent $args[0] )
+}
+
+function fzfcd {
+    cdp $(fzf)
+}
+
+Set-Alias lg    lazygit
+Set-Alias ls    eza
+Set-Alias gui   gitui
+Set-Alias g     git
+Set-Alias k     kubectl
 Set-Alias v     nvim
 
 function l     { eza --color=auto --icons=auto $args }
