@@ -20,6 +20,7 @@ Set-Alias gui   gitui
 Set-Alias g     git
 Set-Alias k     kubectl
 Set-Alias v     nvim
+Set-Alias neo   neovide
 
 function l     { eza --color=auto --icons=auto $args }
 function ll     { eza --color=auto --icons=auto -al $args }

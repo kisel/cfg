@@ -15,6 +15,9 @@ set tabstop=4
 " Hide spell-checking highlights.
 set nospell
 
+" Hide line numbers as "Relative Line Number Ruler" plugin will show them
+set nonu
+
 " Automatically change the current working directory to the parent of whatever file is currently active in Eclipse. The current working directory is used by the :e command.
 "set autochdir
 
@@ -91,7 +94,8 @@ eclipseaction! eclipserename org.eclipse.jdt.ui.edit.text.java.rename.element
 " amazing 'omnibox' that searches buffers, commands, views, menus, preferences, etc.
 eclipseuiaction! search_action org.eclipse.ui.window.quickAccess
 
-
+" quick switch editor
+eclipseuiaction! Buffers org.eclipse.ui.window.openEditorDropDown
 
 eclipseuiaction! eclipseopenresource org.eclipse.ui.navigate.openResource
 
@@ -118,7 +122,7 @@ eclipseaction! debug_cfg org.eclipse.debug.ui.commands.OpenDebugConfigurations
 "
 " Next bookmark
 eclipseaction! openfmhere org.eclipse.ui.ide.showInSystemExplorer
-eclipseaction! :junit org.eclipse.jdt.junit.junitShortcut.debug
+eclipseaction! junit org.eclipse.jdt.junit.junitShortcut.debug
 
 eclipseaction! eclipserename org.eclipse.jdt.ui.edit.text.java.rename.element
 
@@ -166,6 +170,7 @@ nnoremap <c-p> :eclipseopenresource<cr>
 noremap <space>ff :eclipseopenresource<cr>
 noremap <space>fo :outline<cr>
 
+noremap <space><space> :Buffers<cr>
 noremap <space>wq :bd<CR>
 noremap <c-w>p :perspective<CR>
 
