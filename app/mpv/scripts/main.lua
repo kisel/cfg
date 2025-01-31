@@ -7,6 +7,9 @@ require('ontop')
 mp.set_property("border", "no")
 mp.set_property("osd-bar", "no")
 
+-- fullscreen on start
+mp.set_property("fs", "yes")
+
 -- do not close mpv on playlist end
 mp.set_property("keep-open", "yes")
 

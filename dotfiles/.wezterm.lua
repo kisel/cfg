@@ -221,8 +221,8 @@ config.keys = {
 	{ key = "/", mods = "LEADER", action = act.ShowTabNavigator },
 	{ key = "?", mods = "CTRL|SHIFT", action = act.ShowTabNavigator },
 
-	-- tmux close tab
-	{ key = "K", mods = "LEADER|SHIFT", action = act({ CloseCurrentTab = { confirm = true } }) },
+	-- tmux close tab/pane
+	{ key = "K", mods = "LEADER|SHIFT", action = act({ CloseCurrentPane = { confirm = true } }) },
 	-- { key = "d", mods = "LEADER",       action=act{CloseCurrentPane={confirm=true}}},
 	-- { key = "x", mods = "LEADER",       action=act{CloseCurrentPane={confirm=true}}}
 
