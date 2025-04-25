@@ -9,6 +9,10 @@ Set-Alias open Invoke-Item
 Set-Alias time Measure-Command
 Set-Alias which Get-Command
 
+function ssha {
+    ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $args
+}
+
 #Function head($fn) {
 #        Get-Content -Path $fn -ReadCount 32 | Format-List | more
 #}
