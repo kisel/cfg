@@ -60,6 +60,7 @@ eclipseaction! bookmark org.eclipse.ui.edit.addBookmark
 
 "show parent file directory in system explorer
 eclipseaction! showexp org.eclipse.ui.ide.showInSystemExplorer
+eclipseaction! showprj org.eclipse.ui.ide.showInProjectExplorer
 
 eclipseaction! ref org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace
 
@@ -179,8 +180,14 @@ noremap <space>wq :bd<CR>
 noremap <c-w>p :perspective<CR>
 noremap <c-w>z :eclipsezoom<CR>
 
+
 " Refactor Rename
 nnoremap <space>rr :eclipserename<cr>
+
+" Maximize current window with Ctrl-M or vim keys
+noremap <c-w>m :maximize<CR>
+nnoremap <space>z :maximize<cr>
+
 " Refactor Name
 nnoremap <space>rn :eclipserename<cr>
 
@@ -209,4 +216,10 @@ nnoremap <S-F10>     :debug_run_to_line<cr>
 " Eclipse default for run to line is C-r, but vim uses it for undo-redo
 nnoremap <space>dr     :debug_run_to_line<cr>
 noremap <space>vr source ~/.vrapperrc<CR>
+
+" doesn't work properly in vrapper
+"nnoremap <space>ll :let @+=expand('%:p') .. ':' .. line('.') .. '\n' .. getline('.')<CR>
+nnoremap <space>ll :let @+=@%
+
+
 
