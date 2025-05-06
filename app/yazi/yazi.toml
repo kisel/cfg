@@ -1,0 +1,21 @@
+# yazi.toml
+[manager]
+show_hidden = true
+
+# see https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/yazi-default.toml
+
+[opener]
+edit = [
+	# custom
+	{ run = 'nvim "%*"', desc = "nvim", block = true, for = "windows" },
+	{ run = 'neovide %*', orphan = true, desc = "neovide", for = "windows" },
+	{ run = 'vim "%*"', desc = "vim", block = true, for = "windows" },
+	{ run = 'gvim %*',    orphan = true, desc = "gvim", for = "windows" },
+
+	# from yazi-default
+	{ run = '${EDITOR:-vi} "$@"', desc = "$EDITOR", block = true, for = "unix" },
+	{ run = 'code %*',    orphan = true, desc = "code",           for = "windows" },
+	{ run = 'code -w %*', block = true,  desc = "code (block)",   for = "windows" },
+
+]
+

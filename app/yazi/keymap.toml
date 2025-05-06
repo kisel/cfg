@@ -1,0 +1,20 @@
+
+# Docs: https://yazi-rs.github.io/docs/configuration/keymap
+# Default: https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/keymap-default.toml
+
+[manager]
+
+prepend_keymap = [
+	# override Enter as I mistakenly press it too often
+	{ on = [ "<Enter>" ], run = "open --interactive",         desc = "Open the selected files interactively" },
+
+	# enable relative motion plugin m<NUM>[hjkl]
+	{ on = [ "m" ], run = "plugin relative-motions", desc = "Move in relative steps" }
+
+]
+
+append_keymap = [
+	# { on = [ "<C-b>" ], run = 'my-fev-command2', desc = "Just for test!" },
+	{ on = [ "g", "w" ],       run = "cd ~/ws",             desc = "Go to ~/ws" },
+	{ on = [ "g", "y" ],       run = "cd ~/AppData/Roaming/yazi/config",    desc = "Go to YAZI config directory" },
+]
