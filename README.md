@@ -37,3 +37,15 @@ bash $HOME/.cfg/bootstrap.sh
 cat $HOME/.cfg/bootstrap.sh
 ```
 
+### Git push shortcut
+
+```
+git push git@github.com:kisel/cfg.git
+```
+
+or 
+```
+sh sync.sh
+```
+
+
