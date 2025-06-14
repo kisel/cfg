@@ -11,5 +11,6 @@ git log origin...
 echo "Send?"
 read x
 git push git@github.com:kisel/cfg.git
+git pull --rebase
 
 
