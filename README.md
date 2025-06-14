@@ -15,3 +15,25 @@ git clone git@github.com:kisel/cfg.git ~/.cfg
 ```
 
 
+
+### Bootstrap
+
+#### Linux
+
+```sh
+curl https://raw.githubusercontent.com/kisel/cfg/refs/heads/master/bootstrap.sh | bash
+```
+
+or 
+```sh
+git clone https://github.com/kisel/cfg.git $HOME/.cfg
+bash $HOME/.cfg/bootstrap.sh
+```
+
+
+#### Manual
+
+```sh
+cat $HOME/.cfg/bootstrap.sh
+```
+

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+python3 $HOME/app/bin/note.py $@
+

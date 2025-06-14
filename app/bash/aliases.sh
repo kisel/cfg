@@ -3,7 +3,12 @@ alias scpa='scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
 alias lsblks="lsblk -o name,size,fstype,label,partlabel"
 alias lsblksm="lsblk -o name,size,fstype,label,partlabel,mountpoints"
-lsblk -o name,size,fstype,label,partlabel
+
+# basic aliases. may be overridden later if needed
+alias g="git"
+alias k="kubectl"
+alias l="ls -al"
+alias v="vim"
 
 # mkdircd <taget>
 # mkdirp + cd

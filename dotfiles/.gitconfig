@@ -2,7 +2,7 @@
 [user]
 	name = Anton Kiselev
 	# git config --global user.email
-	# email =
+	email = anton.kisel@gmail.com
 
 [alias]
 	co = checkout
