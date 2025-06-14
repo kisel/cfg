@@ -22,6 +22,9 @@ config.font = wezterm.font_with_fallback({
 config.font_size = 12.0
 config.warn_about_missing_glyphs = false
 
+-- use system ssh agent - https://github.com/wezterm/wezterm/discussions/5541
+config.mux_enable_ssh_agent = false
+
 --config.color_scheme = 'AdventureTime'
 --config.color_scheme = 'Batman'
 --config.color_scheme = 'Red Scheme'
@@ -105,8 +108,10 @@ wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
 end)
 
 -- true - graphical tabs. false - text tabs
-config.use_fancy_tab_bar = false
+config.use_fancy_tab_bar = true
 config.show_new_tab_button_in_tab_bar = true
+--config.show_close_tab_button_in_tabs = false
+
 
 --config.color_scheme = "carbonfox"
 --config.color_scheme = 'Batman'
@@ -222,7 +227,7 @@ config.keys = {
 	{ key = "?", mods = "CTRL|SHIFT", action = act.ShowTabNavigator },
 
 	-- tmux close tab/pane
-	{ key = "K", mods = "LEADER|SHIFT", action = act({ CloseCurrentPane = { confirm = true } }) },
+	{ key = "K", mods = "LEADER|SHIFT", action = act({ CloseCurrentPane = { confirm = false } }) },
 	-- { key = "d", mods = "LEADER",       action=act{CloseCurrentPane={confirm=true}}},
 	-- { key = "x", mods = "LEADER",       action=act{CloseCurrentPane={confirm=true}}}
 
