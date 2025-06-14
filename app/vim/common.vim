@@ -24,6 +24,9 @@ nnoremap - :Ex<CR>
 nnoremap <leader>wq :bdel<CR>
 
 
+" fixup https://stackoverflow.com/questions/51388353/vim-changes-into-replace-mode-on-startup
+nnoremap <esc>^[ <esc>^[
+
 syntax on
 filetype on
 filetype indent on
