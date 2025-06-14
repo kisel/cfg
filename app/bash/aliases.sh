@@ -2,6 +2,8 @@ alias ssha='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 alias scpa='scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
 alias lsblks="lsblk -o name,size,fstype,label,partlabel"
+alias lsblksm="lsblk -o name,size,fstype,label,partlabel,mountpoints"
+lsblk -o name,size,fstype,label,partlabel
 
 # mkdircd <taget>
 # mkdirp + cd
