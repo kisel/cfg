@@ -23,6 +23,9 @@
 	rbc = rebase --continue
 	rbs = rebase --skip
 	rba = rebase --abort
+
+	# rebase interactive since last merge commit
+	rbim = !git rebase --interactive $(git log --merges --format=%H -1)
 	dica = diff --cached
 	gcfg = config --global
 	rehard = reset --hard
@@ -30,6 +33,10 @@
 	meff = merge --ff-only
 	mesq = merge --squash
 	puo = push origin
+
+	# create patch from commit in .git/patches
+	mkpatch = !git format-patch -o ./.git/patches/ -1 $1
+
 
 [gui]
 	# disable git gui repository loose objects warning

@@ -53,7 +53,7 @@ awk '/SECTION_whw/{flag=1; next} flag; /^$/{flag=0}' $SELF
 if ask "Clone/update .cfg?" ; then
     git clone https://github.com/kisel/cfg.git ~/.cfg
     cd $HOME/.cfg
-    git remote add github github.com:kisel/cfg.git
+    git remote set-url --push origin github.com:kisel/cfg.git
     git pull
 fi
 fi
