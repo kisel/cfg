@@ -9,6 +9,8 @@ alias g="git"
 alias k="kubectl"
 alias l="ls -al"
 alias v="vim"
+alias pod="podman"
+alias spod="sudo podman"
 
 # mkdircd <taget>
 # mkdirp + cd
