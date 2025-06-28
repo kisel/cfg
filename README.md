@@ -21,7 +21,7 @@ git clone git@github.com:kisel/cfg.git ~/.cfg
 #### Linux
 
 ```sh
-curl https://raw.githubusercontent.com/kisel/cfg/refs/heads/master/bootstrap.sh | bash
+bash <(curl https://raw.githubusercontent.com/kisel/cfg/refs/heads/master/bootstrap.sh)
 ```
 
 or 
