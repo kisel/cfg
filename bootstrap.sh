@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #cat $HOME/.cfg/install/linux/bootstrap.sh
-SELF="$HOME/.cfg/install/linux/bootstrap.sh"
+SELF="$HOME/.cfg/bootstrap.sh"
 
 separate() {
         echo "====================================="
@@ -15,7 +15,8 @@ ask() {
 
     while true; do
         echo -n ">>> $question (y/n): "
-        read -n 1 -s answer
+        #read -n 1 -s answer
+        read answer
         echo ""
         echo ""
 
@@ -29,6 +30,12 @@ ask() {
             echo "Invalid input: '$answer'. Please enter 'y' or 'n'."
         fi
     done
+}
+
+pkginstall() {
+    [ -z "$APT_UPDATED" ] || sudo apt update
+    APT_UPDATED=1
+    sudo apt install $@
 }
 
 append_if_not_found() {
@@ -48,31 +55,54 @@ append_if_not_found() {
     fi
 }
 
+awk '/SECTION_wwthweewr/{flag=1; next} flag; /^$/{flag=0}' $SELF
+if ask "Install BASIC terminal tools: curl, wget, tmux, git?" ; then
+    pkginstall curl wget tmux git
+fi
+
 if ! test -d $HOME/.cfg ; then
-awk '/SECTION_whw/{flag=1; next} flag; /^$/{flag=0}' $SELF
+awk '/SECTION_wkwbkwe/{flag=1; next} flag; /^$/{flag=0}' $SELF
 if ask "Clone/update .cfg?" ; then
     git clone https://github.com/kisel/cfg.git ~/.cfg
     cd $HOME/.cfg
-    git remote set-url --push origin github.com:kisel/cfg.git
+    git remote set-url --push origin git@github.com:kisel/cfg.git
     git pull
 fi
 fi
 
-awk -n '/SECTION_kev/{flag=1; next} flag; /^$/{flag=0}' $SELF
-if ask "Initialize sh,zsh,vim with portable configs" ; then
-    append_if_not_found ~/.vimrc 'source $HOME/.cfg/app/vim/common.vim'
-    cp -v --update=none ~/.cfg/dotfiles/.dircolors ~/.dircolors
-    cp -v --update=none -s ~/.cfg/dotfiles/.gitconfig ~/.gitconfig
-    echo ". $HOME/.cfg/app/bash/aliases.sh" >> $HOME/.bash_profile
+awk '/SECTION_wwthwewgwzewr/{flag=1; next} flag; /^$/{flag=0}' $SELF
+if ask "Install fancy terminal tools: ripgrep zoxide eza?" ; then
+    pkginstall zsh vim fzf ripgrep zoxide eza
+    # vim plugins
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-awk -n '/SECTION_qghhe/{flag=1; next} flag; /^$/{flag=0}' $SELF
+
+if ! test -d $HOME/.oh-my-zsh ; then
+awk '/SECTION_wwthweewr/{flag=1; next} flag; /^$/{flag=0}' $SELF
+if ask "Install oh-my-zsh?" ; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    # It will also ask to switch a default shell
+fi
+fi
+
+
+awk '/SECTION_kev/{flag=1; next} flag; /^$/{flag=0}' $SELF
+if ask "Initialize sh,zsh,vim with portable configs" ; then
+    append_if_not_found ~/.vimrc 'source $HOME/.cfg/app/vim/common.vim'
+    [ -f ~/.dircolors ] ||  cp -v ~/.cfg/dotfiles/.dircolors ~/.dircolors
+    [ -f ~/.gitconfig ] || cp -v ~/.cfg/dotfiles/.gitconfig ~/.gitconfig
+    [ -f ~/.vimrc ] || cp -v -s ~/.cfg/app/vim/template.vim ~/.vimrc
+    append_if_not_found '. $HOME/.cfg/app/bash/aliases.sh' $HOME/.profile
+fi
+
+awk '/SECTION_qghhe/{flag=1; next} flag; /^$/{flag=0}' $SELF
 if ask "Install safe profile tweaks to root user?" ; then
     cat $HOME/.cfg/app/vim/common.vim | sudo tee /root/.vimrc >/dev/null
 fi
 
 if ! test -f $HOME/.ssh/authorized_keys ; then
-awk -n '/SECTION_khmkl/{flag=1; next} flag; /^$/{flag=0}' $SELF
+awk '/SECTION_khmkl/{flag=1; next} flag; /^$/{flag=0}' $SELF
 if ask "Install authorized_keys ? They are missing" ; then
     bash $HOME/.cfg/install/linux/add-ssh-authorized-keys.sh
 fi
