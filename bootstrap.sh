@@ -72,7 +72,7 @@ fi
 
 awk '/SECTION_wwthwewgwzewr/{flag=1; next} flag; /^$/{flag=0}' $SELF
 if ask "Install fancy terminal tools: ripgrep zoxide eza?" ; then
-    pkginstall zsh vim fzf ripgrep zoxide eza
+    pkginstall zsh vim neovim fzf ripgrep zoxide eza p7zip-full
     # vim plugins
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
