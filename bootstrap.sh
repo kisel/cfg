@@ -55,6 +55,10 @@ append_if_not_found() {
     fi
 }
 
+copy_if_not_exist() {
+    [ -f "$2" ] ||  cp -v "$1" "$2"
+}
+
 awk '/SECTION_wwthweewr/{flag=1; next} flag; /^$/{flag=0}' $SELF
 if ask "Install BASIC terminal tools: curl, wget, tmux, git?" ; then
     pkginstall curl wget tmux git
@@ -90,9 +94,10 @@ fi
 awk '/SECTION_kev/{flag=1; next} flag; /^$/{flag=0}' $SELF
 if ask "Initialize sh,zsh,vim with portable configs" ; then
     append_if_not_found ~/.vimrc 'source $HOME/.cfg/app/vim/common.vim'
-    [ -f ~/.dircolors ] ||  cp -v ~/.cfg/dotfiles/.dircolors ~/.dircolors
-    [ -f ~/.gitconfig ] || cp -v ~/.cfg/dotfiles/.gitconfig ~/.gitconfig
-    [ -f ~/.vimrc ] || cp -v -s ~/.cfg/app/vim/template.vim ~/.vimrc
+    copy_if_not_exist ~/.cfg/dotfiles/.dircolors   ~/.dircolors
+    copy_if_not_exist ~/.cfg/dotfiles/.gitconfig   ~/.gitconfig
+    copy_if_not_exist ~/.cfg/dotfiles/.tmux.conf   ~/.tmux.conf
+    copy_if_not_exist ~/.cfg/app/vim/template.vim  ~/.vimrc
     append_if_not_found '. $HOME/.cfg/app/bash/aliases.sh' $HOME/.profile
 fi
 
