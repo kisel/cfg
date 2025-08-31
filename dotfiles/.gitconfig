@@ -37,6 +37,9 @@
 	# create patch from commit in .git/patches
 	mkpatch = !git format-patch -o ./.git/patches/ -1 $1
 
+	# repository-local gitignore
+	ignore-local = !vim ./.git/info/exclude
+
 
 [gui]
 	# disable git gui repository loose objects warning

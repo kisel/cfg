@@ -2,19 +2,14 @@ cfg
 ====
 Dotfiles and common scripts
 
-### Clone HTTPS
-```
+### Clone
+```sh
 git clone https://github.com/kisel/cfg.git ~/.cfg
+cd ~/.cfg
+git remote set-url --push origin git@github.com:kisel/cfg.git
 ```
 
-### Clone SSH
 ```
-git clone git@github.com:kisel/cfg.git ~/.cfg
-#cd ~/.cfg
-#git remote add cfg-ssh git@github.com:kisel/cfg.git
-```
-
-
 
 ### Bootstrap
 

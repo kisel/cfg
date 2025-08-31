@@ -8,6 +8,7 @@ Set-PSReadlineOption -EditMode Emacs
 
 # Ctrl-D:  ViExit - Exits the shell.
 Set-PSReadlineKeyHandler -Key ctrl+d -Function ViExit
+Set-PSReadlineKeyHandler -Key ctrl+в -Function ViExit
 
 # cls
 Set-PSReadlineKeyHandler -Key ctrl+l -Function ClearScreen

@@ -170,6 +170,9 @@ noremap <space>3 `E
 noremap <space>4 `R
 noremap <space>5 `T
 
+" yank to the end of line
+noremap Y y$
+
 nnoremap <c-p> :eclipseopenresource<cr>
 noremap <space>ff :eclipseopenresource<cr>
 

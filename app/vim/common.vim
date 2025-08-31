@@ -17,12 +17,18 @@ set belloff=all
 " show numbers on netrw. :help netrw-P18
 let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
 autocmd FileType netrw setlocal number
-" - to edit
+"
+" - Show Netrw from everywhere on '-'
 nnoremap - :Ex<CR>
 
 " Delete buffer
 nnoremap <leader>wq :bdel<CR>
 
+" Yank to the EOL
+nnoremap Y y$
+
+" always display status line with filename and mode
+set laststatus=2
 
 " fixup https://stackoverflow.com/questions/51388353/vim-changes-into-replace-mode-on-startup
 nnoremap <esc>^[ <esc>^[
