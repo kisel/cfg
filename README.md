@@ -16,7 +16,7 @@ git remote set-url --push origin git@github.com:kisel/cfg.git
 #### Linux
 
 ```sh
-curl https://raw.githubusercontent.com/kisel/cfg/refs/heads/master/bootstrap.sh | bash
+bash <(curl https://raw.githubusercontent.com/kisel/cfg/refs/heads/master/bootstrap.sh)
 ```
 
 or 

@@ -12,6 +12,7 @@
 	br = branch
 	ci = commit
 	cia = commit -a
+	amend = commit --amend
 	fix = commit --amend
 	wip = commit -m wip
 	cp = cherry-pick

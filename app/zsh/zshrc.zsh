@@ -23,7 +23,7 @@ source ~/.cfg/app/jumplist/jumplist.sh
 # disable escaping when pasted to zsh
 DISABLE_MAGIC_FUNCTIONS=true
 
-source ~/.cfg/app/bash/use-ssh-agent.sh
+#source ~/.cfg/app/bash/use-ssh-agent.sh
 source ~/.cfg/app/bash/yazi.sh
 source ~/.cfg/app/bash/aliases.sh
 
