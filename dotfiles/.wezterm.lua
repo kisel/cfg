@@ -25,6 +25,8 @@ config.warn_about_missing_glyphs = false
 -- use system ssh agent - https://github.com/wezterm/wezterm/discussions/5541
 config.mux_enable_ssh_agent = false
 
+config.front_end = "Software"
+
 --config.color_scheme = 'AdventureTime'
 --config.color_scheme = 'Batman'
 --config.color_scheme = 'Red Scheme'
@@ -93,19 +95,20 @@ ext.RenameWindow = act.PromptInputLine({
 	end),
 })
 
-wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
-	local zoomed = ""
-	if tab.active_pane.is_zoomed then
-		zoomed = "[Z] "
-	end
-
-	local index = ""
-	if #tabs > 1 then
-		index = string.format("[%d/%d] ", tab.tab_index + 1, #tabs)
-	end
-
-	return (wezterm.GLOBAL.title or "") .. zoomed .. index .. tab.active_pane.title
-end)
+-- This may cause performance problems for some reason
+-- wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
+-- 	local zoomed = ""
+-- 	if tab.active_pane.is_zoomed then
+-- 		zoomed = "[Z] "
+-- 	end
+-- 
+-- 	local index = ""
+-- 	if #tabs > 1 then
+-- 		index = string.format("[%d/%d] ", tab.tab_index + 1, #tabs)
+-- 	end
+-- 
+-- 	return (wezterm.GLOBAL.title or "") .. zoomed .. index .. tab.active_pane.title
+-- end)
 
 -- true - graphical tabs. false - text tabs
 config.use_fancy_tab_bar = true
