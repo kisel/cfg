@@ -7,6 +7,10 @@ local mux = wezterm.mux
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+local is_windows = wezterm.target_triple:find("windows") ~= nil
+--wezterm.log_info("Running on Windows: " .. tostring(is_windows))
+
+
 -- https://www.nerdfonts.com/font-downloads
 -- wezterm ls-fonts --list-system|grep
 config.font = wezterm.font_with_fallback({
@@ -25,7 +29,7 @@ config.warn_about_missing_glyphs = false
 -- use system ssh agent - https://github.com/wezterm/wezterm/discussions/5541
 config.mux_enable_ssh_agent = false
 
-config.front_end = "Software"
+-- config.front_end = "Software"
 
 --config.color_scheme = 'AdventureTime'
 --config.color_scheme = 'Batman'
@@ -57,18 +61,35 @@ config.audible_bell = "Disabled"
 
 config.default_domain = "unix"
 
-if wezterm.target_triple:find("windows") ~= nil then
-  config.default_prog = { "pwsh", "-nologo" }
+if is_windows then
+  -- config.default_prog = { "pwsh", "-nologo" }
+  config.default_prog = { "nu" } -- nushell
   -- allows using ssh-agent on Windows unlike the default "Libssh"
   config.ssh_backend = "Ssh2"
 end
 
 -- maximized window on 0,0 instead of somewhere centered
-wezterm.on("gui-startup", function(cmd)
-	local tab, pane, window = mux.spawn_window(cmd or {})
-	window:gui_window():set_position(0, 0)
-	window:gui_window():maximize()
+--wezterm.on("gui-startup", function(cmd)
+--	-- local tab, pane, window = mux.spawn_window(cmd or {})
+--	-- window:gui_window():set_position(0, 0)
+--	-- window:gui_window():maximize()
+--	-- window:maximize()
+--end)
+
+-- wezterm.on('window-config-reloaded', function(window, pane)
+--   window:maximize()
+-- end)
+
+wezterm.on('gui-startup', function(cmd)
+  -- Spawn the window first
+  local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+  -- Maximize the GUI window
+  window:gui_window():maximize()
 end)
+
+-- Add this to force the relayout
+config.adjust_window_size_when_changing_font_size = false
+
 
 -- timeout_millisecondm defaults to 1000 and can be omitted
 -- tmux leader
@@ -180,8 +201,8 @@ config.keys = {
 	{ key = "y", mods = "CTRL|SHIFT", action = wezterm.action.SpawnCommandInNewTab({
 		args = { "cmd.exe" }, -- make sure to also install clink. pure cmd is garbage
 	}) },
-	{ key = "y", mods = "CTRL|SHIFT", action = wezterm.action.SpawnCommandInNewTab({
-		args = { "cmd.exe" },
+	{ key = "r", mods = "CTRL|SHIFT", action = wezterm.action.SpawnCommandInNewTab({
+		args = { "nu" }, -- nushell
 	}) },
 
 	-- vim ctrl-w splits
