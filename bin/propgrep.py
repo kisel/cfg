@@ -17,8 +17,9 @@ filter = args.filter
 
 
 filterEscaped = filter.strip().encode("unicode-escape").decode('ascii')
+#filterEscaped = "'" + filterEscaped + "'"
 
-grep_cmd = ["git", "grep", "-iF", filterEscaped, "--", "*.properties"]
+grep_cmd = ["git", "grep", "--line-number", "--color", "-iF", filterEscaped, "--", "*.properties"]
 #print(" ".join(grep_cmd))
 result = subprocess.run(
             grep_cmd, 
