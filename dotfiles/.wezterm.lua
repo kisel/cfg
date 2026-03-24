@@ -23,6 +23,14 @@ config.font = wezterm.font_with_fallback({
 	-- "0xProto Nerd Font Mono", -- delete? just for glyphs
 })
 
+
+-- wezterm perf issues
+-- cpu usage on idle on cairo_font_options_get_variations
+config.front_end = "WebGpu" -- Or "OpenGL" if WebGpu isn't supported on your hardware
+--config.front_end = "OpenGL" -- Or "OpenGL" if WebGpu isn't supported on your hardware
+--config.webgpu_power_preference = "HighPerformance"
+--config.webgpu_power_preference = "LowPower"
+
 config.font_size = 12.0
 config.warn_about_missing_glyphs = false
 
@@ -41,32 +49,34 @@ config.window_decorations = "RESIZE"
 --config.color_scheme = 'Batman'
 --config.color_scheme = 'Builtin Solarized Dark'
 
-config.unix_domains = {
-	{
-		name = "unix",
-	},
-	{
-		name = "dropdown",
-	},
-}
-
 config.check_for_updates = false
 config.audible_bell = "Disabled"
 
--- This causes `wezterm` to act as though it was started as
--- `wezterm connect unix` by default, connecting to the unix
--- domain on startup.
--- If you prefer to connect manually, leave out this line.
--- config.default_gui_startup_args = { 'connect', 'unix' }
 
-config.default_domain = "unix"
-
-if is_windows then
+if not is_windows then
   -- config.default_prog = { "pwsh", "-nologo" }
   config.default_prog = { "nu" } -- nushell
   -- allows using ssh-agent on Windows unlike the default "Libssh"
+	-- but ~/.ssh/known_hosts should use ecdsa-sha2-nistp256. it doesn't support ssh-ed25519 yet
   config.ssh_backend = "Ssh2"
+else
+	config.unix_domains = {
+		{
+			name = "unix",
+		},
+		{
+			name = "dropdown",
+		},
+	}
+
+	-- This causes `wezterm` to act as though it was started as
+	-- `wezterm connect unix` by default, connecting to the unix
+	-- domain on startup.
+	-- If you prefer to connect manually, leave out this line.
+	-- config.default_gui_startup_args = { 'connect', 'unix' }
+	config.default_domain = "unix"
 end
+
 
 -- maximized window on 0,0 instead of somewhere centered
 --wezterm.on("gui-startup", function(cmd)
@@ -80,12 +90,12 @@ end
 --   window:maximize()
 -- end)
 
-wezterm.on('gui-startup', function(cmd)
-  -- Spawn the window first
-  local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
-  -- Maximize the GUI window
-  window:gui_window():maximize()
-end)
+-- wezterm.on('gui-startup', function(cmd)
+--   -- Spawn the window first
+--   local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+--   -- Maximize the GUI window
+--   window:gui_window():maximize()
+-- end)
 
 -- Add this to force the relayout
 config.adjust_window_size_when_changing_font_size = false
@@ -201,7 +211,7 @@ config.keys = {
 	{ key = "y", mods = "CTRL|SHIFT", action = wezterm.action.SpawnCommandInNewTab({
 		args = { "cmd.exe" }, -- make sure to also install clink. pure cmd is garbage
 	}) },
-	{ key = "r", mods = "CTRL|SHIFT", action = wezterm.action.SpawnCommandInNewTab({
+	{ key = "u", mods = "CTRL|SHIFT", action = wezterm.action.SpawnCommandInNewTab({
 		args = { "nu" }, -- nushell
 	}) },
 
