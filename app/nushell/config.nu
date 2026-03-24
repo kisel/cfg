@@ -9,6 +9,8 @@
 # COPY this to config nu or source
 # source ~/.cfg/app/nushell/config.nu
 
+let PROFILE = $nu.config-path
+
 $env.config.show_banner = false
 $env.config.buffer_editor = "nvim"
 
@@ -16,6 +18,7 @@ source ~/.cfg/app/nushell/yazi.nu
 source ~/.cfg/app/nushell/zoxide.nu
 source ~/.cfg/app/nushell/alias.nu
 source ~/.cfg/app/nushell/carapace.nu
+source ~/.cfg/app/nushell/msys.nu
 
 use ~/.cfg/app/nushell/completions/git-completions.nu *
 use ~/.cfg/app/nushell/completions/scoop-completions.nu *
