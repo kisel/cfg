@@ -5,18 +5,29 @@ abbr -a k kubectl
 abbr -a v nvim
 abbr -a neo neovide
 abbr -a lg lazygit
-abbr -a ls eza
+#abbr -a ls eza
 abbr -a l eza
 abbr -a ll eza -al
 abbr -a gui gitui
-abbr -a open open
 abbr -a y yazi
+
+if not set -q EDITOR
+    if type -q nvim
+        set -gx EDITOR nvim
+    else if type -q vim
+        set -gx EDITOR vim
+    else
+        set -gx EDITOR vi
+    end
+end
+
+abbr -a v $EDITOR
 
 # stop shortening directories. unless path is too long
 set -g fish_prompt_pwd_dir_length 10
 
 # https://yazi-rs.github.io/docs/quick-start/
-function y
+function yazi
     set -l tmp (mktemp -t "yazi-cwd.XXXXXX")
     command yazi $argv --cwd-file=$tmp
     set -l cwd (cat $tmp)
