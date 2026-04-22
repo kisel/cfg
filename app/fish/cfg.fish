@@ -10,6 +10,8 @@ abbr -a l eza
 abbr -a ll eza -al
 abbr -a gui gitui
 abbr -a y yazi
+abbr -a p podman
+abbr -a pod podman
 
 if not set -q EDITOR
     if type -q nvim
