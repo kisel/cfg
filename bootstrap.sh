@@ -61,7 +61,7 @@ copy_if_not_exist() {
 
 awk '/SECTION_wwthweewr/{flag=1; next} flag; /^$/{flag=0}' $SELF
 if ask "Install BASIC terminal tools: curl, wget, tmux, git?" ; then
-    pkginstall curl wget tmux git
+    pkginstall curl wget tmux git fish
 fi
 
 if ! test -d $HOME/.cfg ; then
