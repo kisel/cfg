@@ -30,4 +30,11 @@ CapsLock::ESC
     Return
 }
 
-XButton2::Ctrl
+;XButton2::Ctrl
+
+; Disable the "Back" side button (typically the bottom-most one)
+XButton1::Return
+; Disable the "Forward" side button (typically the top-most one)
+XButton2::Return
+
+;LAlt::RButton
