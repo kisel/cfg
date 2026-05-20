@@ -5,8 +5,11 @@ Dotfiles and common scripts
 ### Clone
 ```sh
 git clone https://github.com/kisel/cfg.git ~/.cfg
-cd ~/.cfg
-git remote set-url --push origin git@github.com:kisel/cfg.git
+git -C ~/.cfg remote set-url --push origin git@github.com:kisel/cfg.git
+
+#and optionally configure nvim
+git clone https://github.com/kisel/config.nvim $HOME/.config/nvim
+git -C $HOME/.config/nvim remote set-url --push origin git@github.com:kisel/config.nvim.git
 ```
 
 ```
