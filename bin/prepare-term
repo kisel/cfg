@@ -1,0 +1,28 @@
+#!/bin/sh
+set -x -e
+
+# --- Fish shell ---
+sudo apt-get install -y fish
+if [ "$SHELL" != "$(which fish)" ]; then
+    chsh -s "$(which fish)"
+fi
+
+# Link fish config
+sh "$HOME/.cfg/app/fish/link.sh"
+
+# --- Zoxide ---
+if ! type -q zoxide 2>/dev/null; then
+    if type -q apt-get; then
+        sudo apt-get install -y zoxide
+    fi
+fi
+
+# --- eza ---
+if ! type -q eza 2>/dev/null; then
+    sudo apt-get install -y eza
+fi
+
+# --- Yazi ---
+if ! type -q yazi 2>/dev/null; then
+    sh "$HOME/.cfg/install/linux/yazi.sh"
+fi
