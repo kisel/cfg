@@ -9,12 +9,12 @@ if [ "$(uname -m)" != "x86_64" ]; then
 fi
 
 FN=yazi-x86_64-unknown-linux-gnu.zip
-VER=v25.5.31
+VER=v26.5.6
 TARGET=/opt/yazi-$VER
 sudo mkdir $TARGET
 cd $TARGET
 sudo wget https://github.com/sxyazi/yazi/releases/download/$VER/$FN
-sudo unzip $FN
+sudo 7z x $FN || sudo unzip $FN
 sudo mv yazi-x86_64-unknown-linux-gnu/* $TARGET
 sudo rmdir $TARGET/yazi-x86_64-unknown-linux-gnu
 sudo rm $TARGET/$FN
