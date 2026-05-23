@@ -1,0 +1,29 @@
+
+# https://yazi-rs.github.io/docs/configuration/keymap 
+# 
+[manager]
+
+prepend_keymap = [
+	# override Enter as I mistakenly press it too often
+	{ on = [ "<Enter>" ], run = "open --interactive",         desc = "Open the selected files interactively" },
+
+
+	{ on = [ "1" ], run = "plugin relative-motions --args=1", desc = "Move in relative steps" },
+	{ on = [ "2" ], run = "plugin relative-motions --args=2", desc = "Move in relative steps" },
+	{ on = [ "3" ], run = "plugin relative-motions --args=3", desc = "Move in relative steps" },
+	{ on = [ "4" ], run = "plugin relative-motions --args=4", desc = "Move in relative steps" },
+	{ on = [ "5" ], run = "plugin relative-motions --args=5", desc = "Move in relative steps" },
+	{ on = [ "6" ], run = "plugin relative-motions --args=6", desc = "Move in relative steps" },
+	{ on = [ "7" ], run = "plugin relative-motions --args=7", desc = "Move in relative steps" },
+	{ on = [ "8" ], run = "plugin relative-motions --args=8", desc = "Move in relative steps" },
+	{ on = [ "9" ], run = "plugin relative-motions --args=9", desc = "Move in relative steps" }
+]
+
+append_keymap = [
+	# { on = [ "<C-b>" ], run = 'my-fev-command2', desc = "Just for test!" },
+	{ on = [ "g", "w" ],       run = "cd d:/ws",             desc = "Go to ws directory" },
+	{ on = [ "g", "C" ],       run = "cd c:/",             desc = "Disk C(win)" },
+	{ on = [ "g", "D" ],       run = "cd d:/",             desc = "Disk D(ws)" },
+	{ on = [ "g", "I" ],       run = "cd i:/",             desc = "Disk I(media)" },
+	{ on = [ "g", "y" ],       run = "cd C:/Users/antonk/AppData/Roaming/yazi/config",    desc = "Go to YAZI config directory" },
+]
