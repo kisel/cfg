@@ -11,7 +11,7 @@ fi
 FN=yazi-x86_64-unknown-linux-gnu.zip
 VER=v26.5.6
 TARGET=/opt/yazi-$VER
-sudo mkdir $TARGET
+sudo mkdir -p $TARGET
 cd $TARGET
 sudo wget https://github.com/sxyazi/yazi/releases/download/$VER/$FN
 sudo 7z x $FN || sudo unzip $FN

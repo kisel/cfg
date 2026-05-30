@@ -12,6 +12,8 @@ abbr -a gui gitui
 abbr -a y yazi
 abbr -a p podman
 abbr -a pod podman
+abbr -a i incus
+abbr -a s sudo
 
 if not set -q EDITOR
     if type -q nvim
